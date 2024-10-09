@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export const CalendarSample = () => {
 	const [date, setDate] = useState<Date | undefined>(new Date());
+
 	return (
 		<div className="w-fit">
 			Calendar

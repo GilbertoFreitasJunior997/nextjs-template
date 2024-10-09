@@ -6,6 +6,7 @@ import { CheckboxSample } from "./_samples/checkbox-sample";
 import { CommandSample } from "./_samples/command-sample";
 import { DialogSample } from "./_samples/dialog-sample";
 import { LabelSample } from "./_samples/label-sample";
+import { SheetSample } from "./_samples/sheet-sample";
 import { PopoverSample } from "./_samples/popover-sample";
 
 export default function ComponentsPage() {
@@ -21,7 +22,7 @@ export default function ComponentsPage() {
 				<CommandSample />
 				<DialogSample />
 				<PopoverSample />
-				<LabelSample />
+				<SheetSample />
 				<CalendarSample />
 			</div>
 		</div>
