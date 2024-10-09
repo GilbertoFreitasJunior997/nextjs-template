@@ -1,6 +1,6 @@
 import { Dialog } from "@/components/dialog";
 
-export const DialAogSample = () => {
+export const DialogSample = () => {
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger asChild>
