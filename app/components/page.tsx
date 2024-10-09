@@ -1,13 +1,15 @@
 import { AccordionSample } from "./_samples/accordion-sample";
 import { BadgeSample } from "./_samples/badge-sample";
+import { CheckboxSample } from "./_samples/checkbox-sample";
 
 export default function ComponentsPage() {
 	return (
 		<div>
 			Components
-			<div>
+			<div className="space-y-2">
 				<AccordionSample />
 				<BadgeSample />
+				<CheckboxSample />
 			</div>
 		</div>
 	);
