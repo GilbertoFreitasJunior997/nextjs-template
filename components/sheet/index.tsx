@@ -40,7 +40,7 @@ const Content = forwardRef<SheetContentRef, SheetContentProps>(
 				ref={ref}
 				className={cn(
 					"fixed z-50 gap-4 bg-background p-6 shadow-lg right-0 w-3/4 m-3 rounded-lg flex flex-col",
-					"transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out inset-y-0 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+					"transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out inset-y-0 border data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
 					className,
 				)}
 			>

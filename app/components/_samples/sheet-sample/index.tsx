@@ -66,6 +66,14 @@ export const SheetSample = () => {
 
 					<Sheet.Footer>
 						<Sheet.Close asChild>
+							<Button
+								variant="outline"
+								type="button"
+							>
+								close
+							</Button>
+						</Sheet.Close>
+						<Sheet.Close asChild>
 							<Button type="submit">Save changes</Button>
 						</Sheet.Close>
 					</Sheet.Footer>
