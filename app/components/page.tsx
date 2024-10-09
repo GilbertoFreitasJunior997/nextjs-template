@@ -22,7 +22,6 @@ export default function ComponentsPage() {
 				<CommandSample />
 				<DialogSample />
 				<PopoverSample />
-				<LabelSample />
 				<SheetSample />
 				<CalendarSample />
 			</div>

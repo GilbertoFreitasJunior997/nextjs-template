@@ -19,7 +19,50 @@ export const SheetSample = () => {
 						</Sheet.Description>
 					</Sheet.Header>
 
-					<Sheet.Body> Content </Sheet.Body>
+					<Sheet.Body>
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
+							nam maiores architecto, neque suscipit facilis explicabo
+							asperiores obcaecati, ullam laudantium reprehenderit temporibus
+							ipsa quaerat reiciendis adipisci voluptas, odio voluptates
+							aliquam!
+						</p>
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
+							nam maiores architecto, neque suscipit facilis explicabo
+							asperiores obcaecati, ullam laudantium reprehenderit temporibus
+							ipsa quaerat reiciendis adipisci voluptas, odio voluptates
+							aliquam!
+						</p>
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
+							nam maiores architecto, neque suscipit facilis explicabo
+							asperiores obcaecati, ullam laudantium reprehenderit temporibus
+							ipsa quaerat reiciendis adipisci voluptas, odio voluptates
+							aliquam!
+						</p>
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
+							nam maiores architecto, neque suscipit facilis explicabo
+							asperiores obcaecati, ullam laudantium reprehenderit temporibus
+							ipsa quaerat reiciendis adipisci voluptas, odio voluptates
+							aliquam!
+						</p>
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
+							nam maiores architecto, neque suscipit facilis explicabo
+							asperiores obcaecati, ullam laudantium reprehenderit temporibus
+							ipsa quaerat reiciendis adipisci voluptas, odio voluptates
+							aliquam!
+						</p>
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
+							nam maiores architecto, neque suscipit facilis explicabo
+							asperiores obcaecati, ullam laudantium reprehenderit temporibus
+							ipsa quaerat reiciendis adipisci voluptas, odio voluptates
+							aliquam!
+						</p>
+					</Sheet.Body>
 
 					<Sheet.Footer>
 						<Sheet.Close asChild>
