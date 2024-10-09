@@ -11,6 +11,7 @@ import { PopoverSample } from "./_samples/popover-sample";
 import { InputSample } from "./_samples/input-sample";
 import { DropdownMenuSample } from "./_samples/dropdown-menu-sample";
 import { DatePickerSample } from "./_samples/date-picker-sample";
+import { SkeletonSample } from "./_samples/skeleton-sample";
 
 export default function ComponentsPage() {
 	return (
@@ -30,6 +31,7 @@ export default function ComponentsPage() {
 				<InputSample />
 				<DropdownMenuSample />
 				<DatePickerSample />
+				<SkeletonSample />
 			</div>
 		</div>
 	);
