@@ -2,5 +2,11 @@
 import { Checkbox } from "@/components/checkbox";
 
 export const CheckboxSample = () => {
-	return <Checkbox label="Test string" />;
+	return (
+		<Checkbox
+			label="Test string"
+			id="1"
+			name="checkbox-input"
+		/>
+	);
 };
