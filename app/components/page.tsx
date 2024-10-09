@@ -8,6 +8,7 @@ import { DialogSample } from "./_samples/dialog-sample";
 import { LabelSample } from "./_samples/label-sample";
 import { SheetSample } from "./_samples/sheet-sample";
 import { PopoverSample } from "./_samples/popover-sample";
+import { InputSample } from "./_samples/input-sample";
 import { DropdownMenuSample } from "./_samples/dropdown-menu-sample";
 import { DatePickerSample } from "./_samples/date-picker-sample";
 
@@ -26,6 +27,7 @@ export default function ComponentsPage() {
 				<PopoverSample />
 				<SheetSample />
 				<CalendarSample />
+				<InputSample />
 				<DropdownMenuSample />
 				<DatePickerSample />
 			</div>
