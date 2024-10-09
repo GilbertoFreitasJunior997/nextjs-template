@@ -9,6 +9,7 @@ import { LabelSample } from "./_samples/label-sample";
 import { SheetSample } from "./_samples/sheet-sample";
 import { PopoverSample } from "./_samples/popover-sample";
 import { DropdownMenuSample } from "./_samples/dropdown-menu-sample";
+import { DatePickerSample } from "./_samples/date-picker-sample";
 
 export default function ComponentsPage() {
 	return (
@@ -26,6 +27,7 @@ export default function ComponentsPage() {
 				<SheetSample />
 				<CalendarSample />
 				<DropdownMenuSample />
+				<DatePickerSample />
 			</div>
 		</div>
 	);
