@@ -2,6 +2,7 @@ import { AccordionSample } from "./_samples/accordion-sample";
 import { BadgeSample } from "./_samples/badge-sample";
 import { CheckboxSample } from "./_samples/checkbox-sample";
 import { LabelSample } from "./_samples/label-sample";
+import { ButtonSample } from "./_samples/button-sample";
 
 export default function ComponentsPage() {
 	return (
@@ -12,6 +13,7 @@ export default function ComponentsPage() {
 				<BadgeSample />
 				<LabelSample />
 				<CheckboxSample />
+				<ButtonSample />
 			</div>
 		</div>
 	);
