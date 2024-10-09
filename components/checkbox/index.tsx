@@ -33,7 +33,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
 				</CheckboxPrimitive.Indicator>
 			</CheckboxPrimitive.Root>
 			<Label
-				className="text-sm select-none cursor-pointer peer"
+				className="cursor-pointer peer"
 				htmlFor={id}
 			>
 				{label}
@@ -41,5 +41,4 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
 		</div>
 	),
 );
-
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
