@@ -1,15 +1,14 @@
-import * as React from "react";
-
 import { cn } from "@/lib/utils";
 import { InputProps, InputRef } from "./types";
 import { Label } from "../label";
+import { forwardRef } from "react";
 
-export const Input = React.forwardRef<InputRef, InputProps>(
+export const Input = forwardRef<InputRef, InputProps>(
 	({ className, label, ...props }, ref) => {
 		const Comp = (
 			<input
 				className={cn(
-					"flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+					"flex h-8 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
 					className,
 				)}
 				ref={ref}
@@ -17,16 +16,16 @@ export const Input = React.forwardRef<InputRef, InputProps>(
 			/>
 		);
 
-		if (label) {
-			return (
-				<div className="space-y-1">
-					<Label>{label}</Label>
-					{Comp}
-				</div>
-			);
+		if (!label) {
+			return Comp;
 		}
-		return Comp;
+
+		return (
+			<div className="space-y-1">
+				<Label>{label}</Label>
+				{Comp}
+			</div>
+		);
 	},
 );
-
 Input.displayName = "Input";
