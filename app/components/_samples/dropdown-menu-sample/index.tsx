@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/button";
 import { DropdownMenu } from "@/components/dropdown-menu";
+import { Icon } from "@/components/icon";
 
 export const DropdownMenuSample = () => {
 	return (
@@ -32,22 +33,34 @@ export const DropdownMenuSample = () => {
 					<DropdownMenu.Separator />
 					<DropdownMenu.Group>
 						<DropdownMenu.Item>
-							<User className="mr-2 h-4 w-4" />
+							<Icon
+								src={User}
+								className="mr-2"
+							/>
 							<span>Profile</span>
 							<DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
 						<DropdownMenu.Item>
-							<CreditCard className="mr-2 h-4 w-4" />
+							<Icon
+								src={CreditCard}
+								className="mr-2"
+							/>
 							<span>Billing</span>
 							<DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
 						<DropdownMenu.Item>
-							<Settings className="mr-2 h-4 w-4" />
+							<Icon
+								src={Settings}
+								className="mr-2"
+							/>
 							<span>Settings</span>
 							<DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
 						<DropdownMenu.Item>
-							<Keyboard className="mr-2 h-4 w-4" />
+							<Icon
+								src={Keyboard}
+								className="mr-2"
+							/>
 							<span>Keyboard shortcuts</span>
 							<DropdownMenu.Shortcut>⌘K</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
@@ -55,54 +68,84 @@ export const DropdownMenuSample = () => {
 					<DropdownMenu.Separator />
 					<DropdownMenu.Group>
 						<DropdownMenu.Item>
-							<Users className="mr-2 h-4 w-4" />
+							<Icon
+								src={Users}
+								className="mr-2"
+							/>
 							<span>Team</span>
 						</DropdownMenu.Item>
 						<DropdownMenu.Sub>
 							<DropdownMenu.SubTrigger>
-								<UserPlus className="mr-2 h-4 w-4" />
+								<Icon
+									src={UserPlus}
+									className="mr-2"
+								/>
 								<span>Invite users</span>
 							</DropdownMenu.SubTrigger>
 							<DropdownMenu.Portal>
 								<DropdownMenu.SubContent>
 									<DropdownMenu.Item>
-										<Mail className="mr-2 h-4 w-4" />
+										<Icon
+											src={Mail}
+											className="mr-2"
+										/>
 										<span>Email</span>
 									</DropdownMenu.Item>
 									<DropdownMenu.Item>
-										<MessageSquare className="mr-2 h-4 w-4" />
+										<Icon
+											src={MessageSquare}
+											className="mr-2"
+										/>
 										<span>Message</span>
 									</DropdownMenu.Item>
 									<DropdownMenu.Separator />
 									<DropdownMenu.Item>
-										<PlusCircle className="mr-2 h-4 w-4" />
+										<Icon
+											src={PlusCircle}
+											className="mr-2"
+										/>
 										<span>More...</span>
 									</DropdownMenu.Item>
 								</DropdownMenu.SubContent>
 							</DropdownMenu.Portal>
 						</DropdownMenu.Sub>
 						<DropdownMenu.Item>
-							<Plus className="mr-2 h-4 w-4" />
+							<Icon
+								src={Plus}
+								className="mr-2"
+							/>
 							<span>New Team</span>
 							<DropdownMenu.Shortcut>⌘+T</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
 					</DropdownMenu.Group>
 					<DropdownMenu.Separator />
 					<DropdownMenu.Item>
-						<Github className="mr-2 h-4 w-4" />
+						<Icon
+							src={Github}
+							className="mr-2"
+						/>
 						<span>GitHub</span>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
-						<LifeBuoy className="mr-2 h-4 w-4" />
+						<Icon
+							src={LifeBuoy}
+							className="mr-2"
+						/>
 						<span>Support</span>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item disabled>
-						<Cloud className="mr-2 h-4 w-4" />
+						<Icon
+							src={Cloud}
+							className="mr-2"
+						/>
 						<span>API</span>
 					</DropdownMenu.Item>
 					<DropdownMenu.Separator />
 					<DropdownMenu.Item>
-						<LogOut className="mr-2 h-4 w-4" />
+						<Icon
+							src={LogOut}
+							className="mr-2"
+						/>
 						<span>Log out</span>
 						<DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
 					</DropdownMenu.Item>

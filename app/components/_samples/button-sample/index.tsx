@@ -1,4 +1,5 @@
 import { Button } from "@/components/button";
+import { Icon } from "@/components/icon";
 import { CheckIcon } from "lucide-react";
 
 export const ButtonSample = () => {
@@ -17,37 +18,55 @@ export const ButtonSample = () => {
 					size="icon"
 					variant="default"
 				>
-					<CheckIcon size="1em" />
+					<Icon
+						src={CheckIcon}
+						size="text"
+					/>
 				</Button>
 				<Button
 					size="icon"
 					variant="destructive"
 				>
-					<CheckIcon size="1em" />
+					<Icon
+						src={CheckIcon}
+						size="text"
+					/>
 				</Button>
 				<Button
 					size="icon"
 					variant="ghost"
 				>
-					<CheckIcon size="1em" />
+					<Icon
+						src={CheckIcon}
+						size="text"
+					/>
 				</Button>
 				<Button
 					size="icon"
 					variant="link"
 				>
-					<CheckIcon size="1em" />
+					<Icon
+						src={CheckIcon}
+						size="text"
+					/>
 				</Button>
 				<Button
 					size="icon"
 					variant="outline"
 				>
-					<CheckIcon size="1em" />
+					<Icon
+						src={CheckIcon}
+						size="text"
+					/>
 				</Button>
 				<Button
 					size="icon"
 					variant="secondary"
 				>
-					<CheckIcon size="1em" />
+					<Icon
+						src={CheckIcon}
+						size="text"
+					/>
 				</Button>
 			</div>
 		</div>
