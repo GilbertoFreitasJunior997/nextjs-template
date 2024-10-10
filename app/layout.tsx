@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { PropsWithChildren } from "react";
+import { Toaster } from "@/components/sonner";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				{children}
+				<Toaster />
 			</body>
 		</html>
 	);
