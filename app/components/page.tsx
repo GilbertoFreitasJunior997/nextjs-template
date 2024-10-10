@@ -15,6 +15,7 @@ import { SkeletonSample } from "./_samples/skeleton-sample";
 import { SelectSample } from "./_samples/select-sample";
 import { ProgressSample } from "./_samples/progress-sample";
 import { InputOtpSample } from "./_samples/input-otp-sample";
+import { SonnerSample } from "./_samples/sonner-sample";
 
 export default function ComponentsPage() {
 	return (
@@ -38,6 +39,7 @@ export default function ComponentsPage() {
 				<SelectSample />
 				<ProgressSample />
 				<InputOtpSample />
+				<SonnerSample />
 			</div>
 		</div>
 	);
