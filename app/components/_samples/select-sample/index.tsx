@@ -1,7 +1,7 @@
 "use client";
 import { Select } from "@/components/select";
 
-export const SeparatorSample = () => {
+export const SelectSample = () => {
 	return (
 		<div>
 			<p>Select</p>
