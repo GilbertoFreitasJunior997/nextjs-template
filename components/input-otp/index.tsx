@@ -1,21 +1,20 @@
 "use client";
 
 import { OTPInput, OTPInputContext } from "input-otp";
-
 import { cn } from "@/lib/utils";
 import { forwardRef, useContext } from "react";
 import {
 	InputOtpGroupProps,
 	InputOtpGroupRef,
-	InputOtpProps,
-	InputOtpRef,
+	InputOtpRootProps,
+	InputOtpRootRef,
 	InputOtpSeparatorProps,
 	InputOtpSeparatorRef,
 	InputOtpSlotProps,
 	InputOtpSlotRef,
 } from "./types";
 
-const Root = forwardRef<InputOtpRef, InputOtpProps>(
+const Root = forwardRef<InputOtpRootRef, InputOtpRootProps>(
 	({ className, containerClassName, ...props }, ref) => (
 		<OTPInput
 			ref={ref}
@@ -50,7 +49,7 @@ const Slot = forwardRef<InputOtpSlotRef, InputOtpSlotProps>(
 			<div
 				ref={ref}
 				className={cn(
-					"relative flex h-9 w-9 items-center justify-center border-y border-r border-input text-sm shadow-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
+					"relative flex size-9 items-center justify-center border-y border-r border-input text-sm shadow-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
 					isActive && "z-10 ring-1 ring-ring",
 					className,
 				)}
