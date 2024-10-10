@@ -7,12 +7,7 @@ import {
 	DotFilledIcon,
 } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
-import {
-	forwardRef,
-	ElementRef,
-	ComponentPropsWithoutRef,
-	HTMLAttributes,
-} from "react";
+import { forwardRef } from "react";
 import {
 	DropdownMenuCheckboxItemProps,
 	DropdownMenuCheckboxItemRef,
@@ -32,6 +27,7 @@ import {
 	DropdownMenuSubTriggerProps,
 	DropdownMenuSubTriggerRef,
 } from "./types";
+import { Icon } from "../icon";
 
 const Root = DropdownMenuPrimitive.Root;
 
@@ -59,7 +55,10 @@ const SubTrigger = forwardRef<
 		{...props}
 	>
 		{children}
-		<ChevronRightIcon className="ml-auto h-4 w-4" />
+		<Icon
+			src={ChevronRightIcon}
+			className="ml-auto"
+		/>
 	</DropdownMenuPrimitive.SubTrigger>
 ));
 SubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
@@ -127,7 +126,7 @@ const CheckboxItem = forwardRef<
 	>
 		<span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
 			<DropdownMenuPrimitive.ItemIndicator>
-				<CheckIcon className="h-4 w-4" />
+				<Icon src={CheckIcon} />
 			</DropdownMenuPrimitive.ItemIndicator>
 		</span>
 		{children}
@@ -149,7 +148,10 @@ const RadioItem = forwardRef<
 	>
 		<span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
 			<DropdownMenuPrimitive.ItemIndicator>
-				<DotFilledIcon className="h-4 w-4 fill-current" />
+				<Icon
+					src={DotFilledIcon}
+					className="fill-current"
+				/>
 			</DropdownMenuPrimitive.ItemIndicator>
 		</span>
 		{children}

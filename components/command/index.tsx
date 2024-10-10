@@ -23,6 +23,7 @@ import {
 	CommandSeparatorRef,
 	CommandShortcutProps,
 } from "./types";
+import { Icon } from "../icon";
 
 const Root = forwardRef<CommandRootRef, CommandRootProps>(
 	({ className, ...props }, ref) => (
@@ -56,7 +57,10 @@ const Input = forwardRef<CommandInputRef, CommandInputProps>(
 			className="flex items-center border-b px-3"
 			cmdk-input-wrapper=""
 		>
-			<MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+			<Icon
+				src={MagnifyingGlassIcon}
+				className="mr-2 shrink-0 opacity-50"
+			/>
 			<CommandPrimitive.Input
 				ref={ref}
 				className={cn(

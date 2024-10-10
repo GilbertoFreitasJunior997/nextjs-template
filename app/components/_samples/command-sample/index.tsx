@@ -1,6 +1,7 @@
 "use client";
 
 import { Command } from "@/components/command";
+import { Icon } from "@/components/icon";
 import {
 	Calculator,
 	Calendar,
@@ -20,32 +21,50 @@ export const CommandSample = () => {
 					<Command.Empty>No results found.</Command.Empty>
 					<Command.Group heading="Suggestions">
 						<Command.Item>
-							<Calendar className="mr-2 h-4 w-4" />
+							<Icon
+								src={Calendar}
+								className="mr-2"
+							/>
 							<span>Calendar</span>
 						</Command.Item>
 						<Command.Item>
-							<Smile className="mr-2 h-4 w-4" />
+							<Icon
+								src={Smile}
+								className="mr-2"
+							/>
 							<span>Search Emoji</span>
 						</Command.Item>
 						<Command.Item disabled>
-							<Calculator className="mr-2 h-4 w-4" />
+							<Icon
+								src={Calculator}
+								className="mr-2"
+							/>
 							<span>Calculator</span>
 						</Command.Item>
 					</Command.Group>
 					<Command.Separator />
 					<Command.Group heading="Settings">
 						<Command.Item>
-							<User className="mr-2 h-4 w-4" />
+							<Icon
+								src={User}
+								className="mr-2"
+							/>
 							<span>Profile</span>
 							<Command.Shortcut>⌘P</Command.Shortcut>
 						</Command.Item>
 						<Command.Item>
-							<CreditCard className="mr-2 h-4 w-4" />
+							<Icon
+								src={CreditCard}
+								className="mr-2"
+							/>
 							<span>Billing</span>
 							<Command.Shortcut>⌘B</Command.Shortcut>
 						</Command.Item>
 						<Command.Item>
-							<Settings className="mr-2 h-4 w-4" />
+							<Icon
+								src={Settings}
+								className="mr-2"
+							/>
 							<span>Settings</span>
 							<Command.Shortcut>⌘S</Command.Shortcut>
 						</Command.Item>
