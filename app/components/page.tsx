@@ -16,6 +16,7 @@ import { SelectSample } from "./_samples/select-sample";
 import { ProgressSample } from "./_samples/progress-sample";
 import { InputOtpSample } from "./_samples/input-otp-sample";
 import { SonnerSample } from "./_samples/sonner-sample";
+import { TextareaSample } from "./_samples/textarea-sample";
 
 export default function ComponentsPage() {
 	return (
@@ -40,6 +41,7 @@ export default function ComponentsPage() {
 				<ProgressSample />
 				<InputOtpSample />
 				<SonnerSample />
+				<TextareaSample />
 			</div>
 		</div>
 	);
