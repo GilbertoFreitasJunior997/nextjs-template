@@ -6,6 +6,7 @@ export const SonnerSample = () => {
 	const handleClick = () => {
 		toast("I am an example");
 	};
+
 	return (
 		<div>
 			<Button onClick={handleClick}>Sonner Example</Button>
