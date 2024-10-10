@@ -5,6 +5,7 @@ import { DayPicker } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { CalendarProps } from "./types";
 import { buttonVariants } from "../button/consts";
+import { Icon } from "../icon";
 
 export const Calendar = ({
 	className,
@@ -56,8 +57,8 @@ export const Calendar = ({
 			...classNames,
 		}}
 		components={{
-			IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
-			IconRight: () => <ChevronRightIcon className="h-4 w-4" />,
+			IconLeft: () => <Icon src={ChevronLeftIcon} />,
+			IconRight: () => <Icon src={ChevronRightIcon} />,
 		}}
 		{...props}
 	/>
