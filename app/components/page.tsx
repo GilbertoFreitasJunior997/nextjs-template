@@ -18,6 +18,7 @@ import { InputOtpSample } from "./_samples/input-otp-sample";
 import { SonnerSample } from "./_samples/sonner-sample";
 import { SwitchSample } from "./_samples/switch-sample";
 import { TextareaSample } from "./_samples/textarea-sample";
+import { ResizableSample } from "./_samples/resizable-sample";
 import { ThemeSwitcherSample } from "./_samples/theme-switcher-sample";
 
 export default function ComponentsPage() {
@@ -45,6 +46,7 @@ export default function ComponentsPage() {
 				<SonnerSample />
 				<SwitchSample />
 				<TextareaSample />
+				<ResizableSample />
 				<ThemeSwitcherSample />
 			</div>
 		</div>
