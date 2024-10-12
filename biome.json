@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": []
+		"ignore": ["./lib/react.d.ts"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -21,13 +21,52 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"complexity": {
+				"noForEach": "error",
+				"noBannedTypes": "error",
+				"noStaticOnlyClass": "error",
+				"noUselessFragments": "error",
+				"noVoid": "error"
+			},
+			"correctness": {
+				"noUnreachable": "error",
+				"noUnusedVariables": "error",
+				"noConstAssign": "error",
+				"noUndeclaredVariables": "error",
+				"noUnusedPrivateClassMembers": "error",
+				"useHookAtTopLevel": "error",
+				"noUnusedImports": "error"
+			},
+			"performance": {
+				"noDelete": "error",
+				"noAccumulatingSpread": "error",
+				"noBarrelFile": "error"
+			},
 			"style": {
+				"noNonNullAssertion": "error",
+				"useBlockStatements": "error",
+				"useShorthandArrayType": "error",
+				"useTemplate": "error",
+				"noParameterAssign": "error",
+				"noVar": "error",
+				"useConst": "error",
+				"useEnumInitializers": "error",
 				"useImportType": "off"
+			},
+			"suspicious": {
+				"noConsoleLog": "error",
+				"noDebugger": "error",
+				"noEmptyInterface": "error",
+				"noExplicitAny": "error",
+				"noRedundantUseStrict": "error",
+				"noShadowRestrictedNames": "error"
 			}
 		}
 	},
 	"javascript": {
 		"formatter": {
+			"enabled": true,
+			"indentStyle": "space",
 			"attributePosition": "multiline"
 		}
 	}

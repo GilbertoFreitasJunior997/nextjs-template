@@ -1,12 +1,12 @@
-import * as ResizablePrimitive from "react-resizable-panels";
 import { ComponentProps } from "react";
+import * as ResizablePrimitive from "react-resizable-panels";
 
 export type ResizablePanelGroupProps = ComponentProps<
-	typeof ResizablePrimitive.PanelGroup
+  typeof ResizablePrimitive.PanelGroup
 >;
 
-export type ResizableHandleProps = React.ComponentProps<
-	typeof ResizablePrimitive.PanelResizeHandle
+export type ResizableHandleProps = ComponentProps<
+  typeof ResizablePrimitive.PanelResizeHandle
 > & {
-	withHandle?: boolean;
+  withHandle?: boolean;
 };
