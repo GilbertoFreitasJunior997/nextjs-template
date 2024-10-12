@@ -8,7 +8,7 @@ export type InputOtpGroupProps = ComponentPropsWithoutRef<"div">;
 export type InputOtpGroupRef = ElementRef<"div">;
 
 export type InputOtpSlotProps = ComponentPropsWithoutRef<"div"> & {
-	index: number;
+  index: number;
 };
 export type InputOtpSlotRef = ElementRef<"div">;
 

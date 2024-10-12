@@ -6,4 +6,4 @@ import { labelVariants } from "./consts";
 export type LabelRef = ElementRef<typeof Root>;
 
 export type LabelProps = ComponentPropsWithoutRef<typeof Root> &
-	VariantProps<typeof labelVariants>;
+  VariantProps<typeof labelVariants>;
