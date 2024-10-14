@@ -1,10 +1,13 @@
-import { cn } from "@/lib/utils";
+import { cn, noop } from "@/lib/utils";
 import { ForwardedRef, forwardRef } from "react";
 import { Label } from "../label";
 import { InputProps, InputRef } from "./types";
 
 export const Input = forwardRef(
-  ({ className, label, ...props }: InputProps, ref: ForwardedRef<InputRef>) => {
+  (
+    { className, value = "", label, onChange = noop, ...props }: InputProps,
+    ref: ForwardedRef<InputRef>,
+  ) => {
     const Comp = (
       <input
         className={cn(
@@ -12,6 +15,8 @@ export const Input = forwardRef(
           className,
         )}
         ref={ref}
+        value={value}
+        onChange={onChange}
         {...props}
       />
     );
