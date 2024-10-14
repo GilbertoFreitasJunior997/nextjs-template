@@ -1,3 +1,4 @@
+import { Label } from "@/components/label";
 import { cn } from "@/lib/utils";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
@@ -10,7 +11,7 @@ export const FormLabel = forwardRef<
   const { error, formItemId } = useFormField();
 
   return (
-    <LabelPrimitive.Label
+    <Label
       ref={ref}
       className={cn(error && "text-destructive", className)}
       htmlFor={formItemId}

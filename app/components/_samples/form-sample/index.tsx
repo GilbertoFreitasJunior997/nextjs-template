@@ -2,13 +2,7 @@
 
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
-import { FormControl } from "@/components/form/components/form-control";
-import { FormDescription } from "@/components/form/components/form-description";
-import { FormField } from "@/components/form/components/form-field";
-import { FormItem } from "@/components/form/components/form-item";
-import { FormLabel } from "@/components/form/components/form-label";
-import { FormMessage } from "@/components/form/components/form-message";
-import { Input } from "@/components/input";
+import { TextFormInput } from "@/components/form/inputs/text-form-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -37,22 +31,11 @@ export const FormSample = () => {
       onSubmit={onSubmit}
       className="w-2/3 space-y-6"
     >
-      <FormField
-        control={form.control}
+      <TextFormInput
+        form={form}
         name="username"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Username</FormLabel>
-            <FormControl>
-              <Input
-                form={form}
-                {...field}
-              />
-            </FormControl>
-            <FormDescription>This is your public display name.</FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
+        label="Username"
+        description="This is your username"
       />
       <Button type="submit">Submit</Button>
     </Form>

@@ -1,10 +1,10 @@
+import { Slot } from "@radix-ui/react-slot";
 import { forwardRef } from "react";
 import { useFormField } from "../../context/form-field-context/hooks/use-form-field";
-import { Slot } from "@radix-ui/react-slot";
 import { FormControlProps, FormControlRef } from "./types";
 
 export const FormControl = forwardRef<FormControlRef, FormControlProps>(
-  ({ ...props }, ref) => {
+  (props, ref) => {
     const { error, formItemId, formDescriptionId, formMessageId } =
       useFormField();
 

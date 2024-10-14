@@ -1,14 +1,10 @@
 import { cn } from "@/lib/utils";
-import { FC, ForwardedRef, forwardRef } from "react";
-import { FieldValues } from "react-hook-form";
+import { ForwardedRef, forwardRef } from "react";
 import { Label } from "../label";
 import { InputProps, InputRef } from "./types";
 
 export const Input = forwardRef(
-  <TForm extends FieldValues>(
-    { className, label, form, ...props }: InputProps<TForm>,
-    ref: ForwardedRef<InputRef>,
-  ) => {
+  ({ className, label, ...props }: InputProps, ref: ForwardedRef<InputRef>) => {
     const Comp = (
       <input
         className={cn(
@@ -32,4 +28,4 @@ export const Input = forwardRef(
     );
   },
 );
-(Input as FC).displayName = "Input";
+Input.displayName = "Input";
