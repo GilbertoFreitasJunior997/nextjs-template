@@ -29,14 +29,12 @@ export const FormSample = () => {
     <Form
       form={form}
       onSubmit={onSubmit}
-      className="w-2/3 space-y-6"
     >
       <TextFormInput
         form={form}
         name="username"
-        label="Username"
-        description="This is your username"
       />
+
       <Button type="submit">Submit</Button>
     </Form>
   );
