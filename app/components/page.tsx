@@ -4,6 +4,7 @@ import { ButtonSample } from "./_samples/button-sample";
 import { CalendarSample } from "./_samples/calendar-sample";
 import { CheckboxSample } from "./_samples/checkbox-sample";
 import { CommandSample } from "./_samples/command-sample";
+import { DataTableSample } from "./_samples/data-table-sample";
 import { DatePickerSample } from "./_samples/date-picker-sample";
 import { DialogSample } from "./_samples/dialog-sample";
 import { DropdownMenuSample } from "./_samples/dropdown-menu-sample";
@@ -27,6 +28,7 @@ export default function ComponentsPage() {
     <div className="p-4">
       Components
       <div className="space-y-4">
+        <DataTableSample />
         <AccordionSample />
         <BadgeSample />
         <ButtonSample />
