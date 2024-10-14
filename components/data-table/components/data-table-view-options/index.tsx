@@ -1,22 +1,26 @@
 "use client";
 
+import { Button } from "@/components/button";
+import { DropdownMenu } from "@/components/dropdown-menu";
+import { Icon } from "@/components/icon";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { DataTableViewOptionsProps } from "./types";
-import { DropdownMenu } from "@/components/dropdown-menu";
-import { Button } from "@/components/button";
 
-export function DataTableViewOptions<TData>({
+export const DataTableViewOptions = <TData,>({
 	table,
-}: DataTableViewOptionsProps<TData>) {
+}: DataTableViewOptionsProps<TData>) => {
 	return (
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild>
 				<Button
 					variant="outline"
 					size="sm"
-					className="ml-auto hidden h-8 lg:flex"
+					className="ml-auto h-8 flex"
 				>
-					<MixerHorizontalIcon className="mr-2 h-4 w-4" />
+					<Icon
+						src={MixerHorizontalIcon}
+						className="mr-2"
+					/>
 					View
 				</Button>
 			</DropdownMenu.Trigger>
@@ -47,4 +51,4 @@ export function DataTableViewOptions<TData>({
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
 	);
-}
+};

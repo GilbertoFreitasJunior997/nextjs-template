@@ -1,8 +1,16 @@
 import { Column } from "@tanstack/react-table";
 import { ReactNode } from "react";
 
+export type DataTableColumnConfigCustomHeader<T> = {
+	title?: never;
+	customHeader: (column: Column<T>) => ReactNode;
+};
+
+export type DataTableColumnConfigTitle<T> = {
+	title?: string;
+	customHeader?: never;
+};
+
 export type DataTableColumnConfig<T> = {
 	key: keyof T;
-	title?: string;
-	customHeader?: (column: Column<T>) => ReactNode;
-};
+} & (DataTableColumnConfigCustomHeader<T> | DataTableColumnConfigTitle<T>);
