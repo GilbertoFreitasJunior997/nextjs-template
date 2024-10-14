@@ -15,7 +15,10 @@ export const DataTableHeader = <TData,>({
 				>
 					{headerGroup.headers.map((header) => {
 						return (
-							<Table.Head key={header.id}>
+							<Table.Head
+								key={header.id}
+								className="space-y-1"
+							>
 								{header.isPlaceholder
 									? null
 									: flexRender(
