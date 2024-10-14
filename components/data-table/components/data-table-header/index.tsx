@@ -9,7 +9,10 @@ export const DataTableHeader = <TData,>({
 	return (
 		<Table.Header>
 			{table.getHeaderGroups().map((headerGroup) => (
-				<Table.Row key={headerGroup.id}>
+				<Table.Row
+					key={headerGroup.id}
+					className="hover:bg-inherit"
+				>
 					{headerGroup.headers.map((header) => {
 						return (
 							<Table.Head key={header.id}>
