@@ -20,12 +20,14 @@ import { SwitchSample } from "./_samples/switch-sample";
 import { TextareaSample } from "./_samples/textarea-sample";
 import { ResizableSample } from "./_samples/resizable-sample";
 import { ThemeSwitcherSample } from "./_samples/theme-switcher-sample";
+import { DataTableSample } from "./_samples/data-table-sample";
 
 export default function ComponentsPage() {
 	return (
 		<div className="p-4">
 			Components
-			<div className="space-y-4">
+			<div className="space-y-4 mt-20">
+				<DataTableSample />
 				<AccordionSample />
 				<BadgeSample />
 				<ButtonSample />
