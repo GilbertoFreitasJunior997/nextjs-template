@@ -12,6 +12,7 @@ import { FormSample } from "./_samples/form-sample";
 import { InputOtpSample } from "./_samples/input-otp-sample";
 import { InputSample } from "./_samples/input-sample";
 import { LabelSample } from "./_samples/label-sample";
+import { NumberInputSample } from "./_samples/number-input-sample";
 import { PopoverSample } from "./_samples/popover-sample";
 import { ProgressSample } from "./_samples/progress-sample";
 import { ResizableSample } from "./_samples/resizable-sample";
@@ -51,6 +52,7 @@ export default function ComponentsPage() {
         <TextareaSample />
         <ResizableSample />
         <ThemeSwitcherSample />
+        <NumberInputSample />
         <FormSample />
       </div>
     </div>
