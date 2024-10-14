@@ -1,14 +1,11 @@
 import { sessionsTable } from "@/db/schemas";
-import { createService } from "../_base";
-import {
-	Session as sessionModel,
-	SessionsInsert,
-} from "@/models/session-model";
+import { Session, SessionInsert } from "@/models/session-model";
+import { sha256 } from "@oslojs/crypto/sha2";
 import {
 	encodeBase32LowerCaseNoPadding,
 	encodeHexLowerCase,
 } from "@oslojs/encoding";
-import { sha256 } from "@oslojs/crypto/sha2";
+import { createService } from "../_base";
 import { DEFAULT_EXPIRATION_DAYS_IN_MS } from "./consts";
 
 const {
@@ -16,12 +13,13 @@ const {
 	getById,
 	delete: deleteSession,
 	update,
-} = createService<sessionModel, SessionsInsert>(sessionsTable);
+} = createService<Session, SessionInsert, string>(sessionsTable);
 
 export const sessionService = {
 	generateSessionToken: () => {
-		const bytes = new Uint8Array(20);
-		crypto.getRandomValues(bytes);
+		let bytes = new Uint8Array(20);
+		bytes = crypto.getRandomValues(bytes);
+
 		const token = encodeBase32LowerCaseNoPadding(bytes);
 		return token;
 	},
@@ -29,7 +27,7 @@ export const sessionService = {
 		const sessionId = encodeHexLowerCase(
 			sha256(new TextEncoder().encode(token)),
 		);
-		const session: sessionModel = {
+		const session: Session = {
 			id: sessionId,
 			userId,
 			expiresAt: new Date(Date.now() + DEFAULT_EXPIRATION_DAYS_IN_MS),
