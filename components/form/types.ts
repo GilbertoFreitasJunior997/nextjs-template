@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { FieldErrors, FieldValues, UseFormReturn } from "react-hook-form";
+import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
 
 type FormCustomProps<TForm extends FieldValues> = {
   form: UseFormReturn<TForm>;
@@ -8,7 +8,9 @@ type FormCustomProps<TForm extends FieldValues> = {
 };
 
 export type FormInputProps<TForm extends FieldValues> = {
+  name: Path<TForm>;
   form: UseFormReturn<TForm>;
+  description?: string;
 };
 
 export type FormProps<TForm extends FieldValues> = Omit<
