@@ -5,6 +5,8 @@ import { sessionsTable } from "./sessions-schema";
 export const usersTable = pgTable("user", {
 	id: serial("id").primaryKey(),
 	email: text().notNull().unique(),
+	googleId: text(),
+	name: text(),
 });
 
 export const usersRelations = relations(usersTable, ({ many }) => ({

@@ -2,6 +2,9 @@ import { z } from "zod";
 
 const envSchema = z.object({
 	DATABASE_URL: z.string(),
+	BASE_URL: z.string(),
+	GOOGLE_CLIENT_SECRET: z.string(),
+	GOOGLE_CLIENT_ID: z.string(),
 });
 
 export let env = {} as Env;
