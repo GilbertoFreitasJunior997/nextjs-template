@@ -1,4 +1,5 @@
 import { FieldValues } from "react-hook-form";
+import { FormInputBase } from "../form/components/form-input-base";
 import { Select } from "../select";
 import { SelectBaseItem, SelectInputProps } from "./types";
 
@@ -12,33 +13,39 @@ export const SelectInput = <
   placeholder,
   className,
   ...formProps
-}: SelectInputProps<TItem, TForm>) => {
-  const selectedValue = value ? String(value) : undefined;
+}: SelectInputProps<TItem, TForm>) => (
+  <FormInputBase {...formProps}>
+    {({ field }) => {
+      const baseValue = formProps.form ? field?.value : value;
+      const selectedValue = baseValue ? String(baseValue) : undefined;
 
-  const handleChange = (newValue?: string) => {
-    const value = items.find((item) => item.id === newValue);
+      const handleChange = (value?: string) => {
+        const newValue = items.find((item) => item.id === value);
 
-    onChange(value);
-  };
+        onChange?.(newValue);
+        field?.onChange(newValue);
+      };
 
-  return (
-    <Select.Root
-      value={selectedValue}
-      onValueChange={handleChange}
-    >
-      <Select.Trigger className={className}>
-        <Select.Value placeholder={placeholder} />
-      </Select.Trigger>
-      <Select.Content>
-        {items.map((item) => (
-          <Select.Item
-            key={item.id}
-            value={String(item.id)}
-          >
-            {item.label}
-          </Select.Item>
-        ))}
-      </Select.Content>
-    </Select.Root>
-  );
-};
+      return (
+        <Select.Root
+          value={selectedValue}
+          onValueChange={handleChange}
+        >
+          <Select.Trigger className={className}>
+            <Select.Value placeholder={placeholder} />
+          </Select.Trigger>
+          <Select.Content>
+            {items.map((item) => (
+              <Select.Item
+                key={item.id}
+                value={String(item.id)}
+              >
+                {item.label}
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select.Root>
+      );
+    }}
+  </FormInputBase>
+);

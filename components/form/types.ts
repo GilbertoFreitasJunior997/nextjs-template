@@ -8,22 +8,30 @@ type FormCustomProps<TForm extends FieldValues> = {
 };
 
 export type InputCustomDefaultProps = {
-  name: string;
   form?: never;
   description?: never;
 };
 export type InputFormDefaultProps<TForm extends FieldValues> = {
-  name: Path<NoInfer<TForm>>;
-  form?: UseFormReturn<TForm>;
+  form: UseFormReturn<TForm>;
   description?: string;
 };
 
-export type InputDefaultProps<TForm extends FieldValues> = (
+export type InputBaseDefaultProps<TForm extends FieldValues> = (
   | InputCustomDefaultProps
   | InputFormDefaultProps<TForm>
 ) & {
   label?: string;
 };
+
+export type InputDefaultPropsName<TForm extends FieldValues> =
+  InputBaseDefaultProps<TForm>["form"] extends never
+    ? string
+    : NoInfer<Path<TForm>>;
+
+export type InputDefaultProps<TForm extends FieldValues> =
+  InputBaseDefaultProps<TForm> & {
+    name: InputDefaultPropsName<TForm>;
+  };
 
 export type FormProps<TForm extends FieldValues> = Omit<
   HTMLAttributes<HTMLFormElement>,

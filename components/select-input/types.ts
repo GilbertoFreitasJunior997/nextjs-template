@@ -7,13 +7,16 @@ export type SelectBaseItem = {
   label: string;
 };
 
+export type SelectInputChangeProps<TItem extends SelectBaseItem> = {
+  onChange: (value?: NoInfer<TItem>) => void;
+};
+
 export type SelectInputProps<
   TItem extends SelectBaseItem,
   TForm extends FieldValues,
 > = InputDefaultProps<TForm> & {
   items: TItem[];
   value?: TItem;
-  onChange: (value?: TItem) => void;
   className?: string;
   placeholder?: ReactNode;
-};
+} & SelectInputChangeProps<TItem>;
