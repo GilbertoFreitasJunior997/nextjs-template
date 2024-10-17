@@ -33,6 +33,7 @@ export const FormSample = () => {
         form={form}
         name="username"
       />
+
       <NumberFormInput
         form={form}
         name="age"

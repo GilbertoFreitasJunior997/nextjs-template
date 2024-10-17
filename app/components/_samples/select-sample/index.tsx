@@ -5,6 +5,7 @@ export const SelectSample = () => {
   return (
     <div>
       <p>Select</p>
+
       <Select.Root>
         <Select.Trigger className="w-[180px]">
           <Select.Value placeholder="Select a fruit" />

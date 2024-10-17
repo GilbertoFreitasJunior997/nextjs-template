@@ -7,10 +7,22 @@ type FormCustomProps<TForm extends FieldValues> = {
   onError?: (errors: FieldErrors<TForm>) => void;
 };
 
-export type FormInputProps<TForm extends FieldValues> = {
-  name: Path<TForm>;
-  form: UseFormReturn<TForm>;
+export type InputCustomDefaultProps = {
+  name: string;
+  form?: never;
+  description?: never;
+};
+export type InputFormDefaultProps<TForm extends FieldValues> = {
+  name: Path<NoInfer<TForm>>;
+  form?: UseFormReturn<TForm>;
   description?: string;
+};
+
+export type InputDefaultProps<TForm extends FieldValues> = (
+  | InputCustomDefaultProps
+  | InputFormDefaultProps<TForm>
+) & {
+  label?: string;
 };
 
 export type FormProps<TForm extends FieldValues> = Omit<
