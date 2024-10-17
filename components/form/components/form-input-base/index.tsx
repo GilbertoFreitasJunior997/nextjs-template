@@ -6,17 +6,17 @@ import { FormField } from "../form-field";
 import { FormItem } from "../form-item";
 import { FormLabel } from "../form-label";
 import { FormMessage } from "../form-message";
-import { FormBaseInputProps } from "./types";
+import { FormInputBaseProps } from "./types";
 
-export const FormBaseInput = <TForm extends FieldValues>({
+export const FormInputBase = <TForm extends FieldValues>({
   form,
   name,
   description,
   label,
   children,
-}: FormBaseInputProps<TForm>) => {
+}: FormInputBaseProps<TForm>) => {
   if (!form) {
-    return null;
+    return children({});
   }
 
   return (

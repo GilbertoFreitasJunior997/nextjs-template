@@ -4,6 +4,7 @@ import { Button } from "@/components/button";
 import { Form } from "@/components/form";
 import { NumberFormInput } from "@/components/form/inputs/number-form-input";
 import { TextFormInput } from "@/components/form/inputs/text-form-input";
+import { SelectInput } from "@/components/select-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -25,21 +26,29 @@ export const FormSample = () => {
   };
 
   return (
-    <Form
-      form={form}
-      onSubmit={onSubmit}
-    >
-      <TextFormInput
-        form={form}
+    <div>
+      <SelectInput
         name="username"
+        items={[]}
+        onChange={() => {
+          //
+        }}
       />
 
-      <NumberFormInput
+      <Form
         form={form}
-        name="age"
-      />
-
-      <Button type="submit">Submit</Button>
-    </Form>
+        onSubmit={onSubmit}
+      >
+        <TextFormInput
+          form={form}
+          name="username"
+        />
+        <NumberFormInput
+          form={form}
+          name="age"
+        />
+        <Button type="submit">Submit</Button>
+      </Form>
+    </div>
   );
 };

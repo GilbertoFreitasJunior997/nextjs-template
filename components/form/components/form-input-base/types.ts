@@ -7,13 +7,13 @@ import {
 } from "react-hook-form";
 import { InputDefaultProps } from "../../types";
 
-export type FormBaseInputChildrenProps<TForm extends FieldValues> = {
+export type FormInputBaseChildrenProps<TForm extends FieldValues> = {
   field: ControllerRenderProps<TForm>;
   fieldState: ControllerFieldState;
   formState: UseFormStateReturn<TForm>;
 };
 
-export type FormBaseInputProps<TForm extends FieldValues> =
+export type FormInputBaseProps<TForm extends FieldValues> =
   InputDefaultProps<TForm> & {
-    children: (props: FormBaseInputChildrenProps<TForm>) => ReactNode;
+    children: (props: Partial<FormInputBaseChildrenProps<TForm>>) => ReactNode;
   };
