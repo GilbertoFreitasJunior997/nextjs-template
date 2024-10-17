@@ -1,3 +1,5 @@
+"use client";
+
 import { cn, noop } from "@/lib/utils";
 import { ForwardedRef, forwardRef } from "react";
 import { Label } from "../label";
