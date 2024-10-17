@@ -4,37 +4,37 @@ import { Table } from "../table";
 import { DataTableHeaderProps } from "./types";
 
 export const DataTableHeader = <TData,>({
-	table,
+  table,
 }: DataTableHeaderProps<TData>) => {
-	return (
-		<Table.Header>
-			{table.getHeaderGroups().map((headerGroup) => (
-				<Table.Row
-					key={headerGroup.id}
-					className="hover:bg-inherit"
-				>
-					{headerGroup.headers.map((header) => {
-						return (
-							<Table.Head
-								key={header.id}
-								className="space-y-1"
-							>
-								{header.isPlaceholder
-									? null
-									: flexRender(
-											header.column.columnDef.header,
-											header.getContext(),
-										)}
+  return (
+    <Table.Header>
+      {table.getHeaderGroups().map((headerGroup) => (
+        <Table.Row
+          key={headerGroup.id}
+          className="hover:bg-inherit"
+        >
+          {headerGroup.headers.map((header) => {
+            return (
+              <Table.Head
+                key={header.id}
+                className="space-y-1"
+              >
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
 
-								<DataTableFilter
-									table={table}
-									column={header.id}
-								/>
-							</Table.Head>
-						);
-					})}
-				</Table.Row>
-			))}
-		</Table.Header>
-	);
+                <DataTableFilter
+                  table={table}
+                  column={header.id}
+                />
+              </Table.Head>
+            );
+          })}
+        </Table.Row>
+      ))}
+    </Table.Header>
+  );
 };

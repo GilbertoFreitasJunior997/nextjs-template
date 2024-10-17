@@ -3,13 +3,13 @@ import { Button } from "@/components/button";
 import { toast } from "sonner";
 
 export const SonnerSample = () => {
-	const handleClick = () => {
-		toast("I am an example");
-	};
+  const handleClick = () => {
+    toast("I am an example");
+  };
 
-	return (
-		<div>
-			<Button onClick={handleClick}>Sonner Example</Button>
-		</div>
-	);
+  return (
+    <div>
+      <Button onClick={handleClick}>Sonner Example</Button>
+    </div>
+  );
 };
