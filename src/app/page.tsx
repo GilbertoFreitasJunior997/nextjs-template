@@ -1,9 +1,12 @@
 "use client";
 
 import { Button } from "@/components/button";
+import { useRouter } from "next/navigation";
 import { createUser, login } from "./_tests";
 
 export default function Home() {
+  const router = useRouter();
+
   const handleCreateUser = async () => {
     const aaa = await createUser();
 
@@ -18,10 +21,20 @@ export default function Home() {
     console.log(aaa);
   };
 
+  const handleRedirect = () => {
+    router.push("components");
+  };
+
   return (
-    <div>
-      <Button onClick={handleCreateUser}> USER </Button>
-      <Button onClick={handleClick}> SESSION </Button>
+    <div className="space-y-4 p-4">
+      <div>
+        <Button onClick={handleRedirect}>Components</Button>
+      </div>
+
+      <div className="space-x-2">
+        <Button onClick={handleCreateUser}> USER </Button>
+        <Button onClick={handleClick}> SESSION </Button>
+      </div>
     </div>
   );
 }
