@@ -86,8 +86,11 @@ importers:
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc-cae764ce-20241025(react@19.0.0-rc-cae764ce-20241025))(react@19.0.0-rc-cae764ce-20241025)
+      oslo:
+        specifier: 1.2.0
+        version: 1.2.0
       pg:
-        specifier: ^8.13.0
+        specifier: ^8.13.1
         version: 8.13.1
       react:
         specifier: 19.0.0-rc-cae764ce-20241025

@@ -7,6 +7,8 @@ import {
 } from "@oslojs/encoding";
 import { createService } from "../_base";
 import { DEFAULT_EXPIRATION_DAYS_IN_MS } from "./consts";
+import { env } from "@/lib/env";
+import { GitHub, Google } from "arctic";
 
 const {
   create,
@@ -14,6 +16,17 @@ const {
   delete: deleteSession,
   update,
 } = createService<Session, SessionInsert, string>(sessionsTable);
+
+export const github = new GitHub(
+  env.GITHUB_CLIENT_ID,
+  env.GITHUB_CLIENT_SECRET,
+);
+
+export const googleAuth = new Google(
+  env.GOOGLE_CLIENT_ID,
+  env.GOOGLE_CLIENT_SECRET,
+  `${env.HOST_NAME}/api/login/google/callback`,
+);
 
 export const sessionService = {
   generateSessionToken: () => {
