@@ -46,8 +46,6 @@ export const getCurrentSession = cache(async () => {
 export const login = async () => {
   const token = sessionService.generateSessionToken();
 
-  setSessionTokenCookie(token, new Date(Date.now() + 1000 * 60 * 60 * 24 * 30));
-
   const session = await sessionService.createSession(token, 1);
 
   return { token, session };
