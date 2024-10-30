@@ -5,7 +5,10 @@ export const InputSample = () => {
     <div>
       <p>Inputs</p>
       <div className="w-[50%]">
-        <Input label="Text" />
+        <Input
+          label="Text"
+          name="textt"
+        />
       </div>
     </div>
   );

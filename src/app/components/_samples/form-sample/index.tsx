@@ -3,8 +3,10 @@
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
 import { NumberFormInput } from "@/components/form/inputs/number-form-input";
-import { TextFormInput } from "@/components/form/inputs/text-form-input";
+import { Input } from "@/components/input";
 import { SelectInput } from "@/components/select-input";
+import { selectBaseItemSchema } from "@/components/select-input/consts";
+import { SelectBaseItem } from "@/components/select-input/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -13,8 +15,40 @@ import { z } from "zod";
 const formSchema = z.object({
   username: z.string().min(2),
   age: z.number(),
+  item: selectBaseItemSchema,
 });
 type FormData = z.infer<typeof formSchema>;
+
+const items: SelectBaseItem[] = [
+  {
+    id: 1,
+    label: "Item 1",
+  },
+  {
+    id: 2,
+    label: "Item 2",
+  },
+  {
+    id: 3,
+    label: "Item 3",
+  },
+  {
+    id: 4,
+    label: "Item 4",
+  },
+  {
+    id: 5,
+    label: "Item 5",
+  },
+  {
+    id: 6,
+    label: "Item 6",
+  },
+  {
+    id: 7,
+    label: "Item 7",
+  },
+];
 
 export const FormSample = () => {
   const form = useForm<FormData>({
@@ -29,23 +63,25 @@ export const FormSample = () => {
     <div>
       <SelectInput
         name="username"
-        items={[]}
-        onChange={() => {
-          //
-        }}
+        items={items}
       />
 
       <Form
         form={form}
         onSubmit={onSubmit}
       >
-        <TextFormInput
-          form={form}
+        <Input
           name="username"
+          form={form}
         />
         <NumberFormInput
           form={form}
           name="age"
+        />
+        <SelectInput
+          name="item"
+          items={items}
+          form={form}
         />
         <Button type="submit">Submit</Button>
       </Form>
