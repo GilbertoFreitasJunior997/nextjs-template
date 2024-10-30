@@ -8,6 +8,7 @@ export const NumberInputSample = () => {
 
   return (
     <NumberInput
+      name="number"
       value={value}
       onChange={setValue}
       label="Number input"

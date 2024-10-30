@@ -16,11 +16,11 @@ export const SelectInput = <
 }: SelectInputProps<TItem, TForm>) => (
   <FormInputBase {...formProps}>
     {({ field }) => {
-      const baseValue = formProps.form ? field?.value : value;
+      const baseValue = formProps.form ? field?.value?.id : value?.id;
       const selectedValue = baseValue ? String(baseValue) : undefined;
 
       const handleChange = (value?: string) => {
-        const newValue = items.find((item) => item.id === value);
+        const newValue = items.find((item) => String(item.id) === value);
 
         onChange?.(newValue);
         field?.onChange(newValue);
