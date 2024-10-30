@@ -5,7 +5,9 @@ import { sessionsTable } from "./sessions-schema";
 export const usersTable = pgTable("users", {
   id: serial("id").primaryKey(),
   email: text().notNull().unique(),
-  googleId: text(),
+  password: text(),
+  googleId: text("google_id"),
+  githubId: text("github_id"),
   name: text(),
 });
 

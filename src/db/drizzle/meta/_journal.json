@@ -29,6 +29,13 @@
       "when": 1730288867188,
       "tag": "0003_late_colossus",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1730298718497,
+      "tag": "0004_daily_jetstream",
+      "breakpoints": true
     }
   ]
 }
