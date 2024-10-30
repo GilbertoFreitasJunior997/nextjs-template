@@ -13,6 +13,13 @@ export default function Page() {
     router.push("sign-up");
   };
 
+  const handleRedirectGithub = () => {
+    router.push("/api/login/github");
+  };
+  const handleRedirectGoogle = () => {
+    router.push("/api/login/google");
+  };
+
   return (
     <div className="w-full max-w-md p-8 space-y-8">
       <h2 className="text-3xl font-extrabold text-center">
@@ -34,6 +41,7 @@ export default function Page() {
         <Button
           variant="outline"
           className="gap-2"
+          onClick={handleRedirectGithub}
         >
           <Icon src={Github} />
           GitHub
@@ -41,6 +49,7 @@ export default function Page() {
         <Button
           variant="outline"
           className="gap-2"
+          onClick={handleRedirectGoogle}
         >
           <Icon src={Mail} />
           Google

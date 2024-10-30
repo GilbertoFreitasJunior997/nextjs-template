@@ -1,16 +1,19 @@
 import "server-only";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
-import { cookies } from "next/headers";
 import { cache } from "react";
+import { cookies } from "next/headers";
+import { defaultSessionKey } from "@/app-config";
 
-const SESSION_COOKIE_NAME = "session";
-
-const { createSession, generateToken, validateToken, invalidateSession } =
-  sessionService;
+const {
+  createSession,
+  generateSessionToken,
+  validateSessionToken,
+  invalidateSession,
+} = sessionService;
 
 export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
-  (await cookies()).set(SESSION_COOKIE_NAME, token, {
+  (await cookies()).set(defaultSessionKey, token, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -19,18 +22,14 @@ export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
   });
 };
 
-const getSessionToken = async () => {
-  return (await cookies()).get(SESSION_COOKIE_NAME)?.value;
-};
-
 export const getCurrentUser = cache(async () => {
-  const token = await getSessionToken();
+  const token = (await cookies()).get(defaultSessionKey);
 
   if (!token) {
     return;
   }
 
-  const session = await validateToken(token);
+  const session = await validateSessionToken(token.value);
 
   if (!session) {
     return;
@@ -51,23 +50,23 @@ export const assertAuthenticated = async () => {
 };
 
 export const setSession = async (userId: number) => {
-  const token = generateToken();
+  const token = generateSessionToken();
   const session = await createSession(token, userId);
 
   await setSessionTokenCookie(token, session.expiresAt);
 };
 
 const deleteSessionTokenCookie = async () => {
-  (await cookies()).delete(SESSION_COOKIE_NAME);
+  (await cookies()).delete(defaultSessionKey);
 };
 
 export const deleteSession = async () => {
-  const token = await getSessionToken();
+  const token = (await cookies()).get(defaultSessionKey);
 
   if (!token) {
     return;
   }
 
-  await invalidateSession(token);
+  await invalidateSession(token.value);
   await deleteSessionTokenCookie();
 };

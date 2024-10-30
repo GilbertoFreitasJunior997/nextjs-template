@@ -6,10 +6,13 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"docker:up": "sudo docker compose up -d",
+		"docker:down": "sudo docker compose down -d"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
+		"@node-rs/argon2": "^2.0.0",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
 		"@radix-ui/react-accordion": "^1.2.1",

@@ -1,10 +1,11 @@
 "use client";
 
 import { fixedForwardRef } from "@/lib/react";
-import { cn } from "@/lib/utils";
+import { cn, uppercaseFirstLetter } from "@/lib/utils";
 import { ChangeEvent, ForwardedRef } from "react";
 import { FieldValues } from "react-hook-form";
 import { FormInputBase } from "../form/components/form-input-base";
+import { Label } from "../label";
 import { InputProps, InputRef } from "./types";
 
 const InputBase = <TForm extends FieldValues>(
@@ -48,7 +49,12 @@ const InputBase = <TForm extends FieldValues>(
         />
       );
 
-      return Comp;
+      return (
+        <div className="space-y-1">
+          <Label>{label ?? uppercaseFirstLetter(name as string)}</Label>
+          {Comp}
+        </div>
+      );
     }}
   </FormInputBase>
 );
