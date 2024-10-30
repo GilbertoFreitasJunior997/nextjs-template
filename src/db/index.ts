@@ -1,3 +1,5 @@
+import "server-only";
+
 import "dotenv/config";
 import { env } from "@/lib/env";
 import { drizzle } from "drizzle-orm/node-postgres";
