@@ -10,7 +10,7 @@ import { DEFAULT_EXPIRATION_DAYS_IN_MS } from "./consts";
 import { env } from "@/lib/env";
 import { GitHub, Google } from "arctic";
 
-const {
+export const {
   create,
   getById,
   delete: deleteSession,
@@ -29,7 +29,7 @@ export const googleAuth = new Google(
 );
 
 export const sessionService = {
-  generateSessionToken: () => {
+  generateToken: () => {
     let bytes = new Uint8Array(20);
     bytes = crypto.getRandomValues(bytes);
 
@@ -49,7 +49,7 @@ export const sessionService = {
 
     return session;
   },
-  validateSessionToken: async (token: string) => {
+  validateToken: async (token: string) => {
     const sessionId = encodeHexLowerCase(
       sha256(new TextEncoder().encode(token)),
     );
@@ -71,7 +71,12 @@ export const sessionService = {
       return await update(id, { expiresAt });
     }
   },
-  invalidateSession: async (sessionId: string) => {
-    await deleteSession(sessionId);
+  invalidateSession: async (token: string) => {
+    const sessionId = encodeHexLowerCase(
+      sha256(new TextEncoder().encode(token)),
+    );
+    const { id } = await getById(sessionId);
+
+    await deleteSession(id);
   },
 };
