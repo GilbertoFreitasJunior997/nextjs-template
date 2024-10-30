@@ -2,7 +2,7 @@
 
 import { fixedForwardRef } from "@/lib/react";
 import { cn } from "@/lib/utils";
-import { ForwardedRef } from "react";
+import { ChangeEvent, ForwardedRef } from "react";
 import { FieldValues } from "react-hook-form";
 import { FormInputBase } from "../form/components/form-input-base";
 import { Label } from "../label";
@@ -30,7 +30,10 @@ const InputBase = <TForm extends FieldValues>(
   >
     {({ field }) => {
       const value = form ? (field?.value ?? "") : baseValue;
-      const handleChange = form ? field?.onChange : onChange;
+      const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        onChange?.(event);
+        field?.onChange(event);
+      };
 
       const Comp = (
         <input
