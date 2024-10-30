@@ -2,10 +2,9 @@
 
 import { fixedForwardRef } from "@/lib/react";
 import { cn } from "@/lib/utils";
-import { ForwardedRef } from "react";
+import { ChangeEvent, ForwardedRef } from "react";
 import { FieldValues } from "react-hook-form";
 import { FormInputBase } from "../form/components/form-input-base";
-import { Label } from "../label";
 import { InputProps, InputRef } from "./types";
 
 const InputBase = <TForm extends FieldValues>(
@@ -30,7 +29,10 @@ const InputBase = <TForm extends FieldValues>(
   >
     {({ field }) => {
       const value = form ? (field?.value ?? "") : baseValue;
-      const handleChange = form ? field?.onChange : onChange;
+      const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        onChange?.(event);
+        field?.onChange(event);
+      };
 
       const Comp = (
         <input
@@ -46,16 +48,7 @@ const InputBase = <TForm extends FieldValues>(
         />
       );
 
-      if (!label) {
-        return Comp;
-      }
-
-      return (
-        <div className="space-y-1">
-          <Label>{label}</Label>
-          {Comp}
-        </div>
-      );
+      return Comp;
     }}
   </FormInputBase>
 );

@@ -9,8 +9,8 @@ export type NumberInputFractionDigitsProps = {
 };
 
 export type NumberInputValueProps = {
-  value: number | undefined;
-  onChange: (value: number | undefined) => void;
+  value?: number | undefined;
+  onChange?: (value: number | undefined) => void;
 };
 
 export type NumberInputProps<TForm extends FieldValues> = OmitMerge<

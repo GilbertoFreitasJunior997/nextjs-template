@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
-import { NumberFormInput } from "@/components/form/inputs/number-form-input";
 import { Input } from "@/components/input";
+import { NumberInput } from "@/components/number-input";
 import { SelectInput } from "@/components/select-input";
 import { selectBaseItemSchema } from "@/components/select-input/consts";
 import { SelectBaseItem } from "@/components/select-input/types";
@@ -73,16 +73,19 @@ export const FormSample = () => {
         <Input
           name="username"
           form={form}
+          type="email"
         />
-        <NumberFormInput
-          form={form}
+        <NumberInput
           name="age"
+          form={form}
+          description="LA EEELE"
         />
         <SelectInput
           name="item"
           items={items}
           form={form}
         />
+
         <Button type="submit">Submit</Button>
       </Form>
     </div>

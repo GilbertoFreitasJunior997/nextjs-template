@@ -1,25 +1,17 @@
-"use client";
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { Github, Mail } from "lucide-react";
-import { SignInForm } from "./sign-in-form";
 import { Separator } from "@/components/separator";
-import { useRouter } from "next/navigation";
+import { Github, Mail } from "lucide-react";
+import { SignUpForm } from "./sign-up-form";
 
 export default function Page() {
-  const router = useRouter();
-
-  const handleRedirectSignUp = () => {
-    router.push("sign-up");
-  };
-
   return (
     <div className="w-full max-w-md p-8 space-y-8">
       <h2 className="text-3xl font-extrabold text-center">
-        Sign in to your account
+        Create an account for free
       </h2>
 
-      <SignInForm />
+      <SignUpForm />
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
@@ -44,15 +36,6 @@ export default function Page() {
         >
           <Icon src={Mail} />
           Google
-        </Button>
-      </div>
-      <div className="flex justify-end items-center text-sm">
-        <p>Doesn't have an account?</p>
-        <Button
-          variant={"link"}
-          onClick={handleRedirectSignUp}
-        >
-          Sign up
         </Button>
       </div>
     </div>
