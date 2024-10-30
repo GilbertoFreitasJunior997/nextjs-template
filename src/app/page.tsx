@@ -2,23 +2,12 @@
 
 import { Button } from "@/components/button";
 import { useRouter } from "next/navigation";
-import { createUser, login } from "./_tests";
 
 export default function Home() {
   const router = useRouter();
 
-  const handleCreateUser = async () => {
-    const aaa = await createUser();
-
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log(aaa);
-  };
-
-  const handleClick = async () => {
-    const aaa = await login();
-
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log(aaa);
+  const handleLogin = async () => {
+    router.push("sign-in");
   };
 
   const handleRedirect = () => {
@@ -32,8 +21,7 @@ export default function Home() {
       </div>
 
       <div className="space-x-2">
-        <Button onClick={handleCreateUser}> USER </Button>
-        <Button onClick={handleClick}> SESSION </Button>
+        <Button onClick={handleLogin}>Sign in</Button>
       </div>
     </div>
   );
