@@ -6,8 +6,7 @@
 		"useIgnoreFile": false
 	},
 	"files": {
-		"ignoreUnknown": false,
-		"ignore": ["./src/lib/react.d.ts"]
+		"ignoreUnknown": false
 	},
 	"formatter": {
 		"enabled": true,

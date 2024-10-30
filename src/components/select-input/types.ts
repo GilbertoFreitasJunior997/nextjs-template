@@ -1,15 +1,10 @@
 import { ReactNode } from "react";
 import { FieldValues } from "react-hook-form";
+import { z } from "zod";
 import { InputDefaultProps } from "../form/types";
+import { selectBaseItemSchema } from "./consts";
 
-export type SelectBaseItem = {
-  id: number | string;
-  label: string;
-};
-
-export type SelectInputChangeProps<TItem extends SelectBaseItem> = {
-  onChange: (value?: NoInfer<TItem>) => void;
-};
+export type SelectBaseItem = z.infer<typeof selectBaseItemSchema>;
 
 export type SelectInputProps<
   TItem extends SelectBaseItem,
@@ -17,6 +12,7 @@ export type SelectInputProps<
 > = InputDefaultProps<TForm> & {
   items: TItem[];
   value?: TItem;
+  onChange?: (value?: TItem) => void;
   className?: string;
   placeholder?: ReactNode;
-} & SelectInputChangeProps<TItem>;
+};

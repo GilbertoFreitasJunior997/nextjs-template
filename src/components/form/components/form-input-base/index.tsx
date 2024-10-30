@@ -1,5 +1,5 @@
 import { uppercaseFirstLetter } from "@/lib/utils";
-import { FieldValues } from "react-hook-form";
+import { FieldValues, Path } from "react-hook-form";
 import { FormControl } from "../form-control";
 import { FormDescription } from "../form-description";
 import { FormField } from "../form-field";
@@ -21,11 +21,11 @@ export const FormInputBase = <TForm extends FieldValues>({
 
   return (
     <FormField
-      name={name}
+      name={name as Path<TForm>}
       control={form.control}
       render={(renderParams) => (
         <FormItem>
-          <FormLabel>{label ?? uppercaseFirstLetter(name)}</FormLabel>
+          <FormLabel>{label ?? uppercaseFirstLetter(name as string)}</FormLabel>
           <FormControl>{children(renderParams)}</FormControl>
           {!!description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
