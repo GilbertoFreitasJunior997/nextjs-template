@@ -18,3 +18,7 @@ export const login = async () => {
 
   return { token, session };
 };
+
+export const getUsers = async () => {
+  return await userService.get();
+};

@@ -2,9 +2,12 @@
 
 import { Button } from "@/components/button";
 import { useRouter } from "next/navigation";
-import { createUser, login } from "./_tests";
+import { createUser, getUsers, login } from "./_tests";
+import { DataTable } from "@/components/data-table";
+import { createDataTableColumns } from "@/components/utils/create-data-table-columns";
+import { User } from "@/models/user-model";
 
-export default function Home() {
+export default async function Home() {
   const router = useRouter();
 
   const handleCreateUser = async () => {
@@ -25,6 +28,15 @@ export default function Home() {
     router.push("components");
   };
 
+  const columns = createDataTableColumns<User>([
+    { key: "id", title: "ID" },
+    { key: "name", title: "Name" },
+    { key: "email", title: "Email" },
+    { key: "googleId", title: "Google ID" },
+  ]);
+
+  const data = await getUsers();
+
   return (
     <div className="space-y-4 p-4">
       <div>
@@ -35,6 +47,10 @@ export default function Home() {
         <Button onClick={handleCreateUser}> USER </Button>
         <Button onClick={handleClick}> SESSION </Button>
       </div>
+      <DataTable
+        columns={columns}
+        data={data}
+      />
     </div>
   );
 }
