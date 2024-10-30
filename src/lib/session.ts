@@ -1,18 +1,15 @@
 import "server-only";
-import { cache } from "react";
-import { cookies } from "next/headers";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
+import { cookies } from "next/headers";
+import { cache } from "react";
 
 const SESSION_COOKIE_NAME = "session";
 
 const { createSession, generateToken, validateToken, invalidateSession } =
   sessionService;
 
-export async function setSessionTokenCookie(
-  token: string,
-  expiresAt: Date,
-): Promise<void> {
+export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
   (await cookies()).set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
     sameSite: "lax",
@@ -20,21 +17,11 @@ export async function setSessionTokenCookie(
     expires: expiresAt,
     path: "/",
   });
-}
+};
 
-export async function deleteSessionTokenCookie(): Promise<void> {
-  (await cookies()).set(SESSION_COOKIE_NAME, "", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 0,
-    path: "/",
-  });
-}
-
-export async function getSessionToken(): Promise<string | undefined> {
+const getSessionToken = async () => {
   return (await cookies()).get(SESSION_COOKIE_NAME)?.value;
-}
+};
 
 export const getCurrentUser = cache(async () => {
   const token = await getSessionToken();
@@ -43,30 +30,38 @@ export const getCurrentUser = cache(async () => {
     return;
   }
 
-  const res = await validateToken(token);
+  const session = await validateToken(token);
 
-  if (!res) {
+  if (!session) {
     return;
   }
 
-  return userService.getById(res.userId);
+  const user = userService.getById(session.userId);
+  return user;
 });
 
 export const assertAuthenticated = async () => {
   const user = await getCurrentUser();
+
   if (!user) {
     throw new Error();
   }
+
   return user;
 };
 
-export async function setSession(userId: number) {
+export const setSession = async (userId: number) => {
   const token = generateToken();
   const session = await createSession(token, userId);
-  await setSessionTokenCookie(token, session.expiresAt);
-}
 
-export async function deleteSession() {
+  await setSessionTokenCookie(token, session.expiresAt);
+};
+
+const deleteSessionTokenCookie = async () => {
+  (await cookies()).delete(SESSION_COOKIE_NAME);
+};
+
+export const deleteSession = async () => {
   const token = await getSessionToken();
 
   if (!token) {
@@ -75,4 +70,4 @@ export async function deleteSession() {
 
   await invalidateSession(token);
   await deleteSessionTokenCookie();
-}
+};

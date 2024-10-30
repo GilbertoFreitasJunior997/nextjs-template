@@ -1,14 +1,14 @@
 import { sessionsTable } from "@/db/schemas";
+import { env } from "@/lib/env";
 import { Session, SessionInsert } from "@/models/session-model";
 import { sha256 } from "@oslojs/crypto/sha2";
 import {
   encodeBase32LowerCaseNoPadding,
   encodeHexLowerCase,
 } from "@oslojs/encoding";
+import { GitHub, Google } from "arctic";
 import { createService } from "../_base";
 import { DEFAULT_EXPIRATION_DAYS_IN_MS } from "./consts";
-import { env } from "@/lib/env";
-import { GitHub, Google } from "arctic";
 
 export const {
   create,
@@ -75,8 +75,7 @@ export const sessionService = {
     const sessionId = encodeHexLowerCase(
       sha256(new TextEncoder().encode(token)),
     );
-    const { id } = await getById(sessionId);
 
-    await deleteSession(id);
+    await deleteSession(sessionId);
   },
 };
