@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { usersTable } from "./users-schema";
 
-export const sessionsTable = pgTable("session", {
+export const sessionsTable = pgTable("sessions", {
   id: text("id").primaryKey(),
   userId: integer("user_id")
     .notNull()

@@ -1,22 +1,35 @@
 import { sessionsTable } from "@/db/schemas";
+import { env } from "@/lib/env";
 import { Session, SessionInsert } from "@/models/session-model";
 import { sha256 } from "@oslojs/crypto/sha2";
 import {
   encodeBase32LowerCaseNoPadding,
   encodeHexLowerCase,
 } from "@oslojs/encoding";
+import { GitHub, Google } from "arctic";
 import { createService } from "../_base";
 import { DEFAULT_EXPIRATION_DAYS_IN_MS } from "./consts";
 
-const {
+export const {
   create,
   getById,
   delete: deleteSession,
   update,
 } = createService<Session, SessionInsert, string>(sessionsTable);
 
+export const github = new GitHub(
+  env.GITHUB_CLIENT_ID,
+  env.GITHUB_CLIENT_SECRET,
+);
+
+export const googleAuth = new Google(
+  env.GOOGLE_CLIENT_ID,
+  env.GOOGLE_CLIENT_SECRET,
+  `${env.HOST_NAME}/api/login/google/callback`,
+);
+
 export const sessionService = {
-  generateSessionToken: () => {
+  generateToken: () => {
     let bytes = new Uint8Array(20);
     bytes = crypto.getRandomValues(bytes);
 
@@ -36,7 +49,7 @@ export const sessionService = {
 
     return session;
   },
-  validateSessionToken: async (token: string) => {
+  validateToken: async (token: string) => {
     const sessionId = encodeHexLowerCase(
       sha256(new TextEncoder().encode(token)),
     );
@@ -58,7 +71,11 @@ export const sessionService = {
       return await update(id, { expiresAt });
     }
   },
-  invalidateSession: async (sessionId: string) => {
+  invalidateSession: async (token: string) => {
+    const sessionId = encodeHexLowerCase(
+      sha256(new TextEncoder().encode(token)),
+    );
+
     await deleteSession(sessionId);
   },
 };
