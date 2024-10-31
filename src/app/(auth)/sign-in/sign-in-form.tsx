@@ -4,6 +4,7 @@ import { Form } from "@/components/form";
 import { Input } from "@/components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -15,7 +16,10 @@ type FormData = z.infer<typeof formSchema>;
 export const SignInForm = () => {
   const form = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = (data: FormData) => {
+    toast(JSON.stringify(data));
+  };
+
   return (
     <Form
       form={form}

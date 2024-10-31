@@ -1,18 +1,16 @@
-import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { setSession } from "@/lib/session";
 import { googleAuth, googleService } from "@/services/google";
 import { GoogleUser } from "@/services/google/types";
 import { redirectLoginURL } from "@/config";
+import { getCookie } from "@/lib/utils";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
-  const storedState =
-    (await cookies()).get("google_oauth_state")?.value ?? null;
-  const codeVerifier =
-    (await cookies()).get("google_code_verifier")?.value ?? null;
+  const storedState = await getCookie("google_oauth_state");
+  const codeVerifier = await getCookie("google_code_verifier");
 
   if (
     !code ||

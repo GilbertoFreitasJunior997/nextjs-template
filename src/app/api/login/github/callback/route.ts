@@ -1,16 +1,16 @@
-import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { setSession } from "@/lib/session";
 import { redirectLoginURL } from "@/config";
 import { github, githubService } from "@/services/github";
 import { GithubEmail, GithubUser } from "@/services/github/types";
+import { getCookie } from "@/lib/utils";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
-  const storedState =
-    (await cookies()).get("github_oauth_state")?.value ?? null;
+  const storedState = await getCookie("github_oauth_state");
+
   if (!code || !state || !storedState || state !== storedState) {
     return new Response(null, {
       status: 400,
