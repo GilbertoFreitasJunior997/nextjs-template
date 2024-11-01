@@ -1,8 +1,8 @@
 import "server-only";
+import { deleteCookie, getCookie, setCookie } from "@/app/_lib/cookies";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
 import { cache } from "react";
-import { deleteCookie, getCookie, setCookie } from "./utils";
 
 export const defaultSessionKey = "session";
 

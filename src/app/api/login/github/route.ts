@@ -1,4 +1,4 @@
-import { setCookie } from "@/lib/utils";
+import { setCookie } from "@/app/_lib/cookies";
 import { github } from "@/services/github";
 import { generateState } from "arctic";
 

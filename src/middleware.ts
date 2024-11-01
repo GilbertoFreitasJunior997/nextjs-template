@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCookie } from "./lib/utils";
-import { defaultSessionKey } from "./lib/session";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  const token = await getCookie(defaultSessionKey);
+  const response = NextResponse.next();
+  const token = response.cookies.get("session"); // TODO: extrair
 
   const isAuthRoute =
     request.nextUrl.pathname.startsWith("/sign-in") ||

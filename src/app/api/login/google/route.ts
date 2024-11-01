@@ -1,6 +1,6 @@
-import { generateCodeVerifier, generateState } from "arctic";
+import { setCookie } from "@/app/_lib/cookies";
 import { googleAuth } from "@/services/google";
-import { setCookie } from "@/lib/utils";
+import { generateCodeVerifier, generateState } from "arctic";
 
 export async function GET(): Promise<Response> {
   const state = generateState();
