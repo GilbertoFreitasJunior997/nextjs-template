@@ -1,6 +1,6 @@
-import { generateCodeVerifier, generateState } from "arctic";
 import { googleAuth } from "@/services/google";
 import { cookies } from "next/headers";
+import { generateCodeVerifier, generateState } from "arctic";
 
 export async function GET(): Promise<Response> {
   const state = generateState();
