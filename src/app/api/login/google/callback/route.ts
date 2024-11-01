@@ -2,21 +2,21 @@ import { OAuth2RequestError } from "arctic";
 import { setSession } from "@/lib/session";
 import { googleAuth, googleService } from "@/services/google";
 import { GoogleUser } from "@/services/google/types";
-import { redirectLoginURL } from "@/config";
-import { getCookie } from "@/lib/utils";
+import { cookies } from "next/headers";
+import { redirectLoginURL } from "@/app-config";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
-  const storedState = await getCookie("google_oauth_state");
-  const codeVerifier = await getCookie("google_code_verifier");
+  const storedState = (await cookies()).get("google_oauth_state");
+  const codeVerifier = (await cookies()).get("google_code_verifier");
 
   if (
     !code ||
     !state ||
-    !storedState ||
-    state !== storedState ||
+    !storedState?.value ||
+    state !== storedState.value ||
     !codeVerifier
   ) {
     return new Response(null, {
@@ -27,7 +27,7 @@ export async function GET(request: Request): Promise<Response> {
   try {
     const tokens = await googleAuth.validateAuthorizationCode(
       code,
-      codeVerifier,
+      codeVerifier.value,
     );
     const response = await fetch(
       "https://openidconnect.googleapis.com/v1/userinfo",

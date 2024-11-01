@@ -5,14 +5,7 @@ import { Input } from "@/components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-  confirmPassword: z.string(),
-});
-type FormData = z.infer<typeof formSchema>;
+import { formSchema, FormData } from "./types";
 
 export const SignUpForm = () => {
   const form = useForm<FormData>({ resolver: zodResolver(formSchema) });

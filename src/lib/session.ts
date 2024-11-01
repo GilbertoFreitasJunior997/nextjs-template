@@ -2,15 +2,14 @@ import "server-only";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
 import { cache } from "react";
-import { deleteCookie, getCookie, setCookie } from "./utils";
-
-export const defaultSessionKey = "session";
+import { cookies } from "next/headers";
+import { defaultSessionKey } from "@/app-config";
 
 const { createSession, generateToken, validateToken, invalidateSession } =
   sessionService;
 
 export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
-  await setCookie(defaultSessionKey, token, {
+  (await cookies()).set(defaultSessionKey, token, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -20,13 +19,13 @@ export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
 };
 
 export const getCurrentUser = cache(async () => {
-  const token = await getCookie(defaultSessionKey);
+  const token = (await cookies()).get(defaultSessionKey);
 
   if (!token) {
     return;
   }
 
-  const session = await validateToken(token);
+  const session = await validateToken(token.value);
 
   if (!session) {
     return;
@@ -54,16 +53,16 @@ export const setSession = async (userId: number) => {
 };
 
 const deleteSessionTokenCookie = async () => {
-  await deleteCookie(defaultSessionKey);
+  (await cookies()).delete(defaultSessionKey);
 };
 
 export const deleteSession = async () => {
-  const token = await getCookie(defaultSessionKey);
+  const token = (await cookies()).get(defaultSessionKey);
 
   if (!token) {
     return;
   }
 
-  await invalidateSession(token);
+  await invalidateSession(token.value);
   await deleteSessionTokenCookie();
 };

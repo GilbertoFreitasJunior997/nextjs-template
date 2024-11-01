@@ -1,6 +1,6 @@
 import { generateCodeVerifier, generateState } from "arctic";
 import { googleAuth } from "@/services/google";
-import { setCookie } from "@/lib/utils";
+import { cookies } from "next/headers";
 
 export async function GET(): Promise<Response> {
   const state = generateState();
@@ -9,8 +9,19 @@ export async function GET(): Promise<Response> {
     scopes: ["profile", "email"],
   });
 
-  await setCookie("google_oauth_state", state);
-  await setCookie("google_code_verifier", codeVerifier);
+  const defaultCookieOptions = {
+    secure: true,
+    path: "/",
+    httpOnly: true,
+    maxAge: 60 * 10,
+  };
+
+  (await cookies()).set("google_oauth_state", state, defaultCookieOptions);
+  (await cookies()).set(
+    "google_code_verifier",
+    codeVerifier,
+    defaultCookieOptions,
+  );
 
   return Response.redirect(url);
 }
