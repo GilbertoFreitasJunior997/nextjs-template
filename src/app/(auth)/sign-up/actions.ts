@@ -1,5 +1,7 @@
 import { userService } from "@/services/user";
 import { FormData } from "./types";
+import { hashPassword } from "@/lib/password";
+import { setSession } from "@/lib/session";
 
 export const signUp = async ({
   email,
@@ -16,10 +18,13 @@ export const signUp = async ({
     throw new Error("Email already in use");
   }
 
-  const hashedPassword = "";
+  const hashedPassword = await hashPassword(password);
 
   const createdUser = await userService.create({
     email,
     password: hashedPassword,
   });
+
+  setSession(createdUser.id);
+  return createdUser;
 };
