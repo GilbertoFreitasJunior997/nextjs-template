@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleSignIn = async () => {
     router.push("sign-in");
   };
 
@@ -21,7 +21,7 @@ export default function Home() {
       </div>
 
       <div className="space-x-2">
-        <Button onClick={handleLogin}>Sign in</Button>
+        <Button onClick={handleSignIn}>Sign in</Button>
       </div>
     </div>
   );

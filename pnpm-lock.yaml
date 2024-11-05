@@ -134,11 +134,7 @@ importers:
         version: 1.9.4
       '@types/node':
         specifier: ^20
-<<<<<<< HEAD
         version: 20.17.6
-=======
-        version: 20.17.5
->>>>>>> 9ff558b (fix(auth): extract cookeis)
       '@types/pg':
         specifier: ^8.11.10
         version: 8.11.10
@@ -1765,16 +1761,11 @@ packages:
   '@tybys/wasm-util@0.8.3':
     resolution: {integrity: sha512-Z96T/L6dUFFxgFJ+pQtkPpne9q7i6kIPYCFnQBHSgSPV9idTsKfIhCss0h5iM9irweZCatkrdeP8yi5uM1eX6Q==}
 
-<<<<<<< HEAD
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
 
   '@types/node@20.17.6':
     resolution: {integrity: sha512-VEI7OdvK2wP7XHnsuXbAJnEpEkF6NjSN45QJlL4VGqZSXsnicpesdTWsg9RISeSdYd3yeRj/y3k5KGjUXYnFwQ==}
-=======
-  '@types/node@20.17.5':
-    resolution: {integrity: sha512-n8FYY/pRxu496441gIcAQFZPKXbhsd6VZygcq+PTSZ75eMh/Ke0hCAROdUa21qiFqKNsPPYic46yXDO1JGiPBQ==}
->>>>>>> 9ff558b (fix(auth): extract cookeis)
 
   '@types/pg@8.11.10':
     resolution: {integrity: sha512-LczQUW4dbOQzsH2RQ5qoeJ6qJPdrcM/DcMLoqWQkMLMsq83J5lAX3LXjdkWdpscFy67JSOWDnh7Ny/sPFykmkg==}
@@ -2731,15 +2722,12 @@ snapshots:
   '@emnapi/core@0.45.0':
     dependencies:
       tslib: 2.8.1
-<<<<<<< HEAD
     optional: true
 
   '@emnapi/core@1.3.1':
     dependencies:
       '@emnapi/wasi-threads': 1.0.1
       tslib: 2.8.1
-=======
->>>>>>> 9ff558b (fix(auth): extract cookeis)
     optional: true
 
   '@emnapi/runtime@0.45.0':
@@ -2750,14 +2738,11 @@ snapshots:
   '@emnapi/runtime@1.3.1':
     dependencies:
       tslib: 2.8.1
-<<<<<<< HEAD
     optional: true
 
   '@emnapi/wasi-threads@1.0.1':
     dependencies:
       tslib: 2.8.1
-=======
->>>>>>> 9ff558b (fix(auth): extract cookeis)
     optional: true
 
   '@esbuild-kit/core-utils@3.3.2':
@@ -3944,26 +3929,18 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-<<<<<<< HEAD
   '@tybys/wasm-util@0.9.0':
     dependencies:
       tslib: 2.8.1
     optional: true
 
   '@types/node@20.17.6':
-=======
-  '@types/node@20.17.5':
->>>>>>> 9ff558b (fix(auth): extract cookeis)
     dependencies:
       undici-types: 6.19.8
 
   '@types/pg@8.11.10':
     dependencies:
-<<<<<<< HEAD
       '@types/node': 20.17.6
-=======
-      '@types/node': 20.17.5
->>>>>>> 9ff558b (fix(auth): extract cookeis)
       pg-protocol: 1.7.0
       pg-types: 4.0.2
 

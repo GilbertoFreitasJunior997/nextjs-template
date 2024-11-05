@@ -1,4 +1,4 @@
-import { redirectLoginURL } from "@/app-config";
+import { appConfig } from "@/app-config";
 import { setSession } from "@/lib/session";
 import { github, githubService } from "@/services/github";
 import { GithubEmail, GithubUser } from "@/services/github/types";
@@ -35,7 +35,7 @@ export async function GET(request: Request): Promise<Response> {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: redirectLoginURL,
+          Location: appConfig.redirectSignInURL,
         },
       });
     }
@@ -59,7 +59,7 @@ export async function GET(request: Request): Promise<Response> {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: redirectLoginURL,
+        Location: appConfig.redirectSignInURL,
       },
     });
   } catch (e) {

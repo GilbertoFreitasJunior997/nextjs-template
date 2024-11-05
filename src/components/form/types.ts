@@ -1,20 +1,11 @@
 import { HTMLAttributes } from "react";
 import { FieldErrors, FieldValues, UseFormReturn } from "react-hook-form";
 
-export type InputCustomDefaultProps = {
-  form?: never;
-};
-export type InputFormDefaultProps<TForm extends FieldValues> = {
-  form: UseFormReturn<TForm>;
-};
-
-export type InputDefaultProps<TForm extends FieldValues> = (
-  | InputCustomDefaultProps
-  | InputFormDefaultProps<TForm>
-) & {
+export type InputDefaultProps<TForm extends FieldValues> = {
   label?: string;
   name: NoInfer<keyof TForm>;
   description?: string;
+  form?: UseFormReturn<TForm>;
 };
 
 type FormCustomProps<TForm extends FieldValues> = {
