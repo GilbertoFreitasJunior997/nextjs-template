@@ -29,7 +29,10 @@ export const createService = <
 
       return data as TModel;
     },
-    getByColumn: async (column: keyof TModel, value: unknown) => {
+    getByColumn: async <TColumn extends keyof TModel>(
+      column: TColumn,
+      value: TModel[TColumn],
+    ) => {
       const columns = getTableColumns(table);
 
       const data = await db
