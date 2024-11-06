@@ -1,16 +1,23 @@
-import { OAuth2RequestError } from "arctic";
+import { appConfig } from "@/app-config";
 import { setSession } from "@/lib/session";
-import { googleAuth, googleService } from "@/services/google";
+import { googleService } from "@/services/google";
+import {
+  googleAuth,
+  googleCodeCookie,
+  googleStateCookie,
+} from "@/services/google/consts";
 import { GoogleUser } from "@/services/google/types";
+import { OAuth2RequestError } from "arctic";
 import { cookies } from "next/headers";
-import { redirectLoginURL } from "@/app-config";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
-  const storedState = (await cookies()).get("google_oauth_state");
-  const codeVerifier = (await cookies()).get("google_code_verifier");
+
+  const c = await cookies();
+  const storedState = c.get(googleStateCookie);
+  const codeVerifier = c.get(googleCodeCookie);
 
   if (
     !code ||
@@ -48,7 +55,7 @@ export async function GET(request: Request): Promise<Response> {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: redirectLoginURL,
+          Location: appConfig.redirectSignInURL,
         },
       });
     }
@@ -58,7 +65,7 @@ export async function GET(request: Request): Promise<Response> {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: redirectLoginURL,
+        Location: appConfig.redirectSignInURL,
       },
     });
   } catch (e) {

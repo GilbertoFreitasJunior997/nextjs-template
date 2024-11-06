@@ -1,10 +1,11 @@
 "use client";
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { Github, Mail } from "lucide-react";
-import { SignInForm } from "./sign-in-form";
 import { Separator } from "@/components/separator";
+import { Github, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { signInConfig } from "./consts";
+import { SignInForm } from "./sign-in-form";
 
 export default function Page() {
   const router = useRouter();
@@ -14,10 +15,10 @@ export default function Page() {
   };
 
   const handleRedirectGithub = () => {
-    router.push("/api/login/github");
+    router.push(signInConfig.githubRoute);
   };
   const handleRedirectGoogle = () => {
-    router.push("/api/login/google");
+    router.push(signInConfig.googleRoute);
   };
 
   return (
