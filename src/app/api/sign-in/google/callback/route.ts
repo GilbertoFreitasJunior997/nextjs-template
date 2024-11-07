@@ -62,6 +62,10 @@ export async function GET(request: Request): Promise<Response> {
 
     const user = await createGoogleUser(googleUser);
     await setSession(user.id);
+
+    c.delete(googleStateCookie);
+    c.delete(googleCodeCookie);
+
     return new Response(null, {
       status: 302,
       headers: {

@@ -1,23 +1,31 @@
 "use client";
+
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
 import { Input } from "@/components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { FormData, formSchema } from "./types";
+import { z } from "zod";
+import { signIn } from "./actions";
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
+export type SignInFormData = z.infer<typeof formSchema>;
 
 export const SignInForm = () => {
-  const form = useForm<FormData>({ resolver: zodResolver(formSchema) });
+  const form = useForm<SignInFormData>({ resolver: zodResolver(formSchema) });
 
-  const handleFormSubmit = (data: FormData) => {
-    toast(JSON.stringify(data));
-  };
+  const { mutate, isPending } = useMutation({
+    mutationFn: (formData: SignInFormData) => signIn(formData),
+  });
 
   return (
     <Form
       form={form}
-      onSubmit={handleFormSubmit}
+      onSubmit={mutate}
     >
       <div className="space-y-4">
         <Input
@@ -35,6 +43,7 @@ export const SignInForm = () => {
         <Button
           type="submit"
           className="w-full"
+          disabled={isPending}
         >
           Sign in
         </Button>

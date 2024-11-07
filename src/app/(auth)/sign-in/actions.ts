@@ -1,35 +1,38 @@
+"use server";
+
 import { verifyPasswordHash } from "@/lib/password";
 import { setSession } from "@/lib/session";
 import { userService } from "@/services/user";
 import { SIGN_IN_INVALID_ERROR_MESSAGE } from "./consts";
-import { FormData } from "./types";
+import { SignInFormData } from "./sign-in-form";
 
-export const signIn = async ({ email, password }: FormData) => {
-  const [user] = await userService.getByColumn("email", email);
+export const signIn = async ({ email, password }: SignInFormData) => {
+  const [dbUser] = await userService.getByColumn("email", email);
 
-  if (!user) {
+  if (!dbUser) {
     throw new Error(SIGN_IN_INVALID_ERROR_MESSAGE);
   }
 
-  if (user.githubId) {
+  if (dbUser.githubId) {
     throw new Error("This email is associated to a Github account");
   }
 
-  if (user.googleId) {
+  if (dbUser.googleId) {
     throw new Error("This email is associated to a Google account");
   }
 
-  if (!user.password) {
+  if (!dbUser.password) {
     throw new Error(SIGN_IN_INVALID_ERROR_MESSAGE);
   }
 
-  const passwordMatches = verifyPasswordHash(user.password, password);
+  const passwordMatches = verifyPasswordHash(dbUser.password, password);
 
   if (!passwordMatches) {
     throw new Error(SIGN_IN_INVALID_ERROR_MESSAGE);
   }
 
-  await setSession(user.id);
+  const { password: _, ...user } = dbUser;
 
+  await setSession(user.id);
   return user;
 };
