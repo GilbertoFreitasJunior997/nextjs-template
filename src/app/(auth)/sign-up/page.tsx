@@ -1,15 +1,19 @@
 "use client";
+
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { Separator } from "@/components/separator";
 import { Github, Mail } from "lucide-react";
-import { SignUpForm } from "./sign-up-form";
 import { useRouter } from "next/navigation";
 import { signInConfig } from "../sign-in/consts";
+import { SignUpForm } from "./sign-up-form";
 
 export default function Page() {
   const router = useRouter();
 
+  const handleRedirectSignIn = () => {
+    router.push("sign-in");
+  };
   const handleRedirectGithub = () => {
     router.push(signInConfig.githubRoute);
   };
@@ -50,6 +54,16 @@ export default function Page() {
         >
           <Icon src={Mail} />
           Google
+        </Button>
+      </div>
+
+      <div className="flex justify-end items-center text-sm">
+        <p>Doesn't have an account?</p>
+        <Button
+          variant={"link"}
+          onClick={handleRedirectSignIn}
+        >
+          Sign up
         </Button>
       </div>
     </div>

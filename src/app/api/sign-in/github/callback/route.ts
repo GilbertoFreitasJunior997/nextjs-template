@@ -1,8 +1,9 @@
 import { appConfig } from "@/app-config";
 import { setSession } from "@/lib/session";
 import { githubService } from "@/services/github";
-import { github } from "@/services/github/consts";
+import { github, githubStateCookie } from "@/services/github/consts";
 import { GithubEmail, GithubUser } from "@/services/github/types";
+import { userService } from "@/services/user";
 import { OAuth2RequestError } from "arctic";
 import { cookies } from "next/headers";
 
@@ -10,7 +11,9 @@ export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
-  const storedState = (await cookies()).get("github_oauth_state");
+
+  const c = await cookies();
+  const storedState = c.get(githubStateCookie);
 
   if (!code || !state || !storedState || state !== storedState?.value) {
     return new Response(null, {
@@ -58,10 +61,19 @@ export async function GET(request: Request): Promise<Response> {
     }
 
     //TODO: validate if githubuser.email is already in the db
+    const emailAlreadyRegistered = await userService.getByColumn(
+      "email",
+      githubUser.email,
+    );
+
+    if (emailAlreadyRegistered) {
+      return new Response(null, { status: 400 });
+    }
 
     const user = await createGithubUser(githubUser);
-
     await setSession(user.id);
+
+    c.delete(githubStateCookie);
     return new Response(null, {
       status: 302,
       headers: {

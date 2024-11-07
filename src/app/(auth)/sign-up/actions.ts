@@ -1,30 +1,41 @@
-import { userService } from "@/services/user";
-import { FormData } from "./types";
+"use server";
+
+import "server-only";
 import { hashPassword } from "@/lib/password";
 import { setSession } from "@/lib/session";
+import { userService } from "@/services/user";
+import { SignUpFormData } from "./sign-up-form";
 
 export const signUp = async ({
   email,
   password,
   confirmPassword,
-}: FormData) => {
+}: SignUpFormData) => {
   if (password !== confirmPassword) {
     throw new Error(`passwords doesn't match`);
   }
 
-  const [userAlreadyRegistered] = await userService.getByColumn("email", email);
+  const [dbUser] = await userService.getByColumn("email", email);
 
-  if (userAlreadyRegistered) {
+  if (dbUser?.githubId) {
+    throw new Error("This email is associated to a Github account");
+  }
+
+  if (dbUser?.googleId) {
+    throw new Error("This email is associated to a Google account");
+  }
+
+  if (dbUser) {
     throw new Error("Email already in use");
   }
 
   const hashedPassword = await hashPassword(password);
 
-  const createdUser = await userService.create({
+  const { password: _, ...createdUser } = await userService.create({
     email,
     password: hashedPassword,
   });
 
-  setSession(createdUser.id);
+  await setSession(createdUser.id);
   return createdUser;
 };

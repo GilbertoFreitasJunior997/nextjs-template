@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { Separator } from "@/components/separator";
@@ -13,7 +14,6 @@ export default function Page() {
   const handleRedirectSignUp = () => {
     router.push("sign-up");
   };
-
   const handleRedirectGithub = () => {
     router.push(signInConfig.githubRoute);
   };
