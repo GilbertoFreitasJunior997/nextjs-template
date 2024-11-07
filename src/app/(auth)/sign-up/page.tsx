@@ -1,10 +1,22 @@
+"use client";
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { Separator } from "@/components/separator";
 import { Github, Mail } from "lucide-react";
 import { SignUpForm } from "./sign-up-form";
+import { useRouter } from "next/navigation";
+import { signInConfig } from "../sign-in/consts";
 
 export default function Page() {
+  const router = useRouter();
+
+  const handleRedirectGithub = () => {
+    router.push(signInConfig.githubRoute);
+  };
+  const handleRedirectGoogle = () => {
+    router.push(signInConfig.googleRoute);
+  };
+
   return (
     <div className="w-full max-w-md p-8 space-y-8">
       <h2 className="text-3xl font-extrabold text-center">
@@ -26,6 +38,7 @@ export default function Page() {
         <Button
           variant="outline"
           className="gap-2"
+          onClick={handleRedirectGithub}
         >
           <Icon src={Github} />
           GitHub
@@ -33,6 +46,7 @@ export default function Page() {
         <Button
           variant="outline"
           className="gap-2"
+          onClick={handleRedirectGoogle}
         >
           <Icon src={Mail} />
           Google

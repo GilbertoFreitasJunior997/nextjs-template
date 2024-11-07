@@ -1,6 +1,7 @@
 import { appConfig } from "@/app-config";
 import { setSession } from "@/lib/session";
-import { github, githubService } from "@/services/github";
+import { githubService } from "@/services/github";
+import { github } from "@/services/github/consts";
 import { GithubEmail, GithubUser } from "@/services/github/types";
 import { OAuth2RequestError } from "arctic";
 import { cookies } from "next/headers";
@@ -19,11 +20,13 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     const tokens = await github.validateAuthorizationCode(code);
+
     const githubUserResponse = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
       },
     });
+
     const githubUser: GithubUser = await githubUserResponse.json();
 
     const { createGithubUser, getAccountByGithubId } = githubService;
@@ -54,7 +57,10 @@ export async function GET(request: Request): Promise<Response> {
       githubUser.email = getPrimaryEmail(githubUserEmails);
     }
 
+    //TODO: validate if githubuser.email is already in the db
+
     const user = await createGithubUser(githubUser);
+
     await setSession(user.id);
     return new Response(null, {
       status: 302,
