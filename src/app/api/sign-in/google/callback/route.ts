@@ -7,6 +7,7 @@ import {
   googleStateCookie,
 } from "@/services/google/consts";
 import { GoogleUser } from "@/services/google/types";
+import { userService } from "@/services/user";
 import { OAuth2RequestError } from "arctic";
 import { cookies } from "next/headers";
 
@@ -52,6 +53,24 @@ export async function GET(request: Request): Promise<Response> {
 
     if (existingUser) {
       await setSession(existingUser.id);
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: appConfig.redirectSignInURL,
+        },
+      });
+    }
+
+    const [emailAlreadyRegistered] = await userService.getByColumn(
+      "email",
+      googleUser.email,
+    );
+
+    if (emailAlreadyRegistered) {
+      const { id } = emailAlreadyRegistered;
+      await userService.update(id, { googleId: googleUser.sub });
+      await setSession(id);
+
       return new Response(null, {
         status: 302,
         headers: {

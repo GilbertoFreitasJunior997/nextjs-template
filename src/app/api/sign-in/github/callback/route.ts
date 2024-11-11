@@ -60,14 +60,22 @@ export async function GET(request: Request): Promise<Response> {
       githubUser.email = getPrimaryEmail(githubUserEmails);
     }
 
-    //TODO: validate if githubuser.email is already in the db
-    const emailAlreadyRegistered = await userService.getByColumn(
+    const [emailAlreadyRegistered] = await userService.getByColumn(
       "email",
       githubUser.email,
     );
 
     if (emailAlreadyRegistered) {
-      return new Response(null, { status: 400 });
+      const { id } = emailAlreadyRegistered;
+      await userService.update(id, { githubId: githubUser.id });
+      await setSession(id);
+
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: appConfig.redirectSignInURL,
+        },
+      });
     }
 
     const user = await createGithubUser(githubUser);
