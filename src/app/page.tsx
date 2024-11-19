@@ -1,40 +1,15 @@
-"use client";
+import { appConfig } from "@/app-config";
+import { sessionCookieKey } from "@/lib/consts";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { Button } from "@/components/button";
-import { useRouter } from "next/navigation";
-import { createUser, login } from "./_tests";
+export default async function Page() {
+  const c = await cookies();
+  const token = c.get(sessionCookieKey);
 
-export default function Home() {
-  const router = useRouter();
+  if (token?.value) {
+    redirect(appConfig.redirectSignInURL);
+  }
 
-  const handleCreateUser = async () => {
-    const aaa = await createUser();
-
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log(aaa);
-  };
-
-  const handleClick = async () => {
-    const aaa = await login();
-
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log(aaa);
-  };
-
-  const handleRedirect = () => {
-    router.push("components");
-  };
-
-  return (
-    <div className="space-y-4 p-4">
-      <div>
-        <Button onClick={handleRedirect}>Components</Button>
-      </div>
-
-      <div className="space-x-2">
-        <Button onClick={handleCreateUser}> USER </Button>
-        <Button onClick={handleClick}> SESSION </Button>
-      </div>
-    </div>
-  );
+  redirect("/sign-in");
 }

@@ -1,3 +1,4 @@
+import { appConfig } from "@/app-config";
 import { sessionCookieKey } from "@/lib/consts";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -7,7 +8,7 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
   const token = (await cookies()).get(sessionCookieKey);
 
   if (token?.value) {
-    redirect("/dashboard");
+    redirect(appConfig.redirectSignInURL);
   }
 
   return (
