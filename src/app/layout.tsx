@@ -1,8 +1,9 @@
 import { QueryClientProvider } from "@/components/query-client-provider";
 import "./globals.css";
+import localFont from "next/font/local";
+import "./globals.css";
 import { Toaster } from "@/components/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
-import localFont from "next/font/local";
 import { PropsWithChildren } from "react";
 
 const geistSans = localFont({

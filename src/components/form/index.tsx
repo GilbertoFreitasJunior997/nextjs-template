@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { FormProps } from "./types";
 import { FieldValues, FormProvider } from "react-hook-form";
+import { FormProps } from "./types";
 
 export const Form = <TForm extends FieldValues>({
   form,

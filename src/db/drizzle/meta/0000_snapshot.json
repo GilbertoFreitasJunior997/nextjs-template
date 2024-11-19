@@ -1,5 +1,5 @@
 {
-  "id": "6625c95c-2fb2-4806-a8ab-45ac274ce08e",
+  "id": "e4ef2b7e-33b1-4698-98ea-0929ef92b280",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -62,20 +62,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "password": {
-          "name": "password",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "google_id": {
-          "name": "google_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_id": {
-          "name": "github_id",
+        "googleId": {
+          "name": "googleId",
           "type": "text",
           "primaryKey": false,
           "notNull": false

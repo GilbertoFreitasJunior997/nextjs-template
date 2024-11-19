@@ -5,12 +5,8 @@ import { cookies } from "next/headers";
 import { cache } from "react";
 import { sessionCookieKey } from "./consts";
 
-const {
-  createSession,
-  generateSessionToken,
-  validateSessionToken,
-  invalidateSession,
-} = sessionService;
+const { createSession, generateToken, validateToken, invalidateSession } =
+  sessionService;
 
 export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
   (await cookies()).set(sessionCookieKey, token, {
@@ -22,14 +18,18 @@ export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
   });
 };
 
+const getSessionToken = async () => {
+  return (await cookies()).get(sessionCookieKey)?.value;
+};
+
 export const getCurrentUser = cache(async () => {
-  const token = (await cookies()).get(sessionCookieKey);
+  const token = await getSessionToken();
 
   if (!token) {
     return;
   }
 
-  const session = await validateSessionToken(token.value);
+  const session = await validateToken(token);
 
   if (!session) {
     return;
@@ -50,7 +50,8 @@ export const assertAuthenticated = async () => {
 };
 
 export const setSession = async (userId: number) => {
-  const token = generateSessionToken();
+  const token = generateToken();
+
   const session = await createSession(token, userId);
 
   await setSessionTokenCookie(token, session.expiresAt);
@@ -61,12 +62,12 @@ const deleteSessionTokenCookie = async () => {
 };
 
 export const deleteSession = async () => {
-  const token = (await cookies()).get(sessionCookieKey);
+  const token = await getSessionToken();
 
   if (!token) {
     return;
   }
 
-  await invalidateSession(token.value);
+  await invalidateSession(token);
   await deleteSessionTokenCookie();
 };

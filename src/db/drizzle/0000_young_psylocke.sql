@@ -7,9 +7,7 @@ CREATE TABLE IF NOT EXISTS "sessions" (
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"email" text NOT NULL,
-	"password" text,
-	"google_id" text,
-	"github_id" text,
+	"googleId" text,
 	"name" text,
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );

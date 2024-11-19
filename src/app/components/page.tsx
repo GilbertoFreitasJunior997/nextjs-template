@@ -4,6 +4,7 @@ import { ButtonSample } from "./_samples/button-sample";
 import { CalendarSample } from "./_samples/calendar-sample";
 import { CheckboxSample } from "./_samples/checkbox-sample";
 import { CommandSample } from "./_samples/command-sample";
+import { DataTableSample } from "./_samples/data-table-sample";
 import { DatePickerSample } from "./_samples/date-picker-sample";
 import { DialogSample } from "./_samples/dialog-sample";
 import { DropdownMenuSample } from "./_samples/dropdown-menu-sample";
@@ -22,7 +23,6 @@ import { SonnerSample } from "./_samples/sonner-sample";
 import { SwitchSample } from "./_samples/switch-sample";
 import { TextareaSample } from "./_samples/textarea-sample";
 import { ThemeSwitcherSample } from "./_samples/theme-switcher-sample";
-import { DataTableSample } from "./_samples/data-table-sample";
 
 export default function ComponentsPage() {
   return (

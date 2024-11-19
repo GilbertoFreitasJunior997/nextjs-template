@@ -1,7 +1,5 @@
 import { AnyPgColumn, AnyPgTable } from "drizzle-orm/pg-core";
 
-export type BaseTable = AnyPgTable & { id: AnyPgColumn };
-
 export type BaseService<
   TModel,
   TInsert,
@@ -17,3 +15,5 @@ export type BaseService<
   update: (id: TId, data: Partial<TInsert>) => Promise<TModel>;
   delete: (id: TId) => Promise<TModel>;
 };
+
+export type BaseTable = AnyPgTable & { id: AnyPgColumn };
