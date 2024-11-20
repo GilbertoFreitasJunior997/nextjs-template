@@ -41,7 +41,12 @@ export const sessionService = {
       sha256(new TextEncoder().encode(token)),
     );
 
-    const { id, expiresAt } = await getById(sessionId);
+    const session = await getById(sessionId);
+    if (!session) {
+      return;
+    }
+    const { id, expiresAt } = session;
+
     const currentDate = Date.now();
 
     if (currentDate >= expiresAt.getTime()) {
@@ -57,6 +62,8 @@ export const sessionService = {
       const expiresAt = new Date(Date.now() + DEFAULT_EXPIRATION_DAYS_IN_MS);
       return await update(id, { expiresAt });
     }
+
+    return session;
   },
   invalidateSession: async (token: string) => {
     const sessionId = encodeHexLowerCase(

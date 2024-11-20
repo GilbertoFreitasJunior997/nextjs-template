@@ -1,4 +1,4 @@
-import { github } from "@/services/github/consts";
+import { github, githubStateCookie } from "@/services/github/consts";
 import { generateState } from "arctic";
 import { cookies } from "next/headers";
 
@@ -9,7 +9,7 @@ export async function GET(): Promise<Response> {
     scopes: ["user:email"],
   });
 
-  (await cookies()).set("github_oauth_state", state, {
+  (await cookies()).set(githubStateCookie, state, {
     path: "/",
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,

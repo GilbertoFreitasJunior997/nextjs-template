@@ -1,3 +1,4 @@
+"use server";
 import "server-only";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
@@ -30,7 +31,6 @@ export const getCurrentUser = cache(async () => {
   }
 
   const session = await validateToken(token);
-
   if (!session) {
     return;
   }
@@ -39,14 +39,10 @@ export const getCurrentUser = cache(async () => {
   return user;
 });
 
-export const assertAuthenticated = async () => {
+export const isAuthenticated = async () => {
   const user = await getCurrentUser();
 
-  if (!user) {
-    throw new Error();
-  }
-
-  return user;
+  return !!user;
 };
 
 export const setSession = async (userId: number) => {
