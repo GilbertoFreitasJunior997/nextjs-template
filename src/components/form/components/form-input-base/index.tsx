@@ -26,7 +26,9 @@ export const FormInputBase = <TForm extends FieldValues>({
       render={(renderParams) => (
         <FormItem>
           <FormLabel>{label ?? uppercaseFirstLetter(name as string)}</FormLabel>
+
           <FormControl>{children(renderParams)}</FormControl>
+
           {!!description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
         </FormItem>

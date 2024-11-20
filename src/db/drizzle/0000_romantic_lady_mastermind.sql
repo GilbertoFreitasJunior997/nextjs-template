@@ -4,7 +4,16 @@ CREATE TABLE IF NOT EXISTS "sessions" (
 	"expires_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
-DROP TABLE "session";--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "users" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"email" text NOT NULL,
+	"password" text,
+	"google_id" text,
+	"github_id" text,
+	"name" text,
+	CONSTRAINT "users_email_unique" UNIQUE("email")
+);
+--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION

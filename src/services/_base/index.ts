@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import { BaseService, BaseTable } from "./types";
 
 export const createService = <
@@ -28,6 +28,19 @@ export const createService = <
         .limit(1);
 
       return data as TModel;
+    },
+    getByColumn: async <TColumn extends keyof TModel>(
+      column: TColumn,
+      value: TModel[TColumn],
+    ) => {
+      const columns = getTableColumns(table);
+
+      const data = await db
+        .select()
+        .from(table)
+        .where(eq(columns[column as string], value));
+
+      return data as TModel[];
     },
     update: async (id: TId, data: Partial<TInsert>) => {
       const [updatedData] = await db

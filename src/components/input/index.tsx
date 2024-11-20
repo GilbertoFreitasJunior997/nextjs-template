@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { ChangeEvent, ForwardedRef } from "react";
 import { FieldValues } from "react-hook-form";
 import { FormInputBase } from "../form/components/form-input-base";
-import { Label } from "../label";
 import { InputProps, InputRef } from "./types";
 
 const InputBase = <TForm extends FieldValues>(
@@ -48,17 +47,11 @@ const InputBase = <TForm extends FieldValues>(
           onChange={handleChange}
         />
       );
-
       if (!label) {
         return Comp;
       }
 
-      return (
-        <div className="space-y-1">
-          <Label>{label}</Label>
-          {Comp}
-        </div>
-      );
+      return <div className="space-y-1">{Comp}</div>;
     }}
   </FormInputBase>
 );

@@ -28,7 +28,7 @@ export default function ComponentsPage() {
   return (
     <div className="p-4">
       Components
-      <div className="space-y-4">
+      <div className="space-y-4 mt-20">
         <DataTableSample />
         <AccordionSample />
         <BadgeSample />
