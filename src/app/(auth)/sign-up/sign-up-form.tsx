@@ -3,21 +3,16 @@
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
 import { Input } from "@/components/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useActionMutation } from "@/lib/hooks/use-action-mutation";
+import { useZodForm } from "@/lib/hooks/use-zod-form";
 import { z } from "zod";
 import { signUp } from "./actions";
 
 const formSchema = z
   .object({
     email: z.string().email(),
-    name: z.string().min(2, {
-      message: "Name must be at least 2 characters",
-    }),
-    password: z.string().min(6, {
-      message: "Password must be at least 6 characters",
-    }),
+    name: z.string().min(2),
+    password: z.string().min(6),
     confirmPassword: z.string(),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
@@ -29,13 +24,14 @@ const formSchema = z
       });
     }
   });
+
 export type SignUpFormData = z.infer<typeof formSchema>;
 
 export const SignUpForm = () => {
-  const form = useForm<SignUpFormData>({ resolver: zodResolver(formSchema) });
+  const form = useZodForm({ schema: formSchema });
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (formData: SignUpFormData) => signUp(formData),
+  const { mutate, isPending } = useActionMutation({
+    action: signUp,
   });
 
   return (

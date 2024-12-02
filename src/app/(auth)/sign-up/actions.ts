@@ -3,30 +3,45 @@
 import "server-only";
 import { hashPassword } from "@/lib/password";
 import { setSession } from "@/lib/session";
+import { ActionResult } from "@/lib/types";
+import { User } from "@/models/user.model";
 import { userService } from "@/services/user";
+import { AuthGithubError, AuthGoogleError } from "../_lib/errors";
 import { SignUpFormData } from "./sign-up-form";
 
 export const signUp = async ({
   email,
   password,
   confirmPassword,
-}: SignUpFormData) => {
+}: SignUpFormData): ActionResult<Omit<User, "password">> => {
   if (password !== confirmPassword) {
-    throw new Error(`passwords doesn't match`);
+    return {
+      success: false,
+      error: new Error(`passwords doesn't match`),
+    };
   }
 
   const [dbUser] = await userService.getByColumn("email", email);
 
   if (dbUser?.githubId) {
-    throw new Error("This email is associated to a Github account");
+    return {
+      success: false,
+      error: new AuthGithubError(),
+    };
   }
 
   if (dbUser?.googleId) {
-    throw new Error("This email is associated to a Google account");
+    return {
+      success: false,
+      error: new AuthGoogleError(),
+    };
   }
 
   if (dbUser) {
-    throw new Error("Email already in use");
+    return {
+      success: false,
+      error: new Error("Email already in use"),
+    };
   }
 
   const hashedPassword = await hashPassword(password);
@@ -37,5 +52,8 @@ export const signUp = async ({
   });
 
   await setSession(createdUser.id);
-  return createdUser;
+  return {
+    success: true,
+    data: createdUser,
+  };
 };

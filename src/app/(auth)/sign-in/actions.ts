@@ -2,37 +2,61 @@
 
 import { verifyPasswordHash } from "@/lib/password";
 import { setSession } from "@/lib/session";
+import { ActionResult } from "@/lib/types";
+import { User } from "@/models/user.model";
 import { userService } from "@/services/user";
-import { SIGN_IN_INVALID_ERROR_MESSAGE } from "./consts";
+import {
+  AuthGithubError,
+  AuthGoogleError,
+  AuthInvalidDataError,
+} from "../_lib/errors";
 import { SignInFormData } from "./sign-in-form";
 
-export const signIn = async ({ email, password }: SignInFormData) => {
+export const signIn = async ({
+  email,
+  password,
+}: SignInFormData): ActionResult<Omit<User, "password">> => {
   const [dbUser] = await userService.getByColumn("email", email);
 
   if (!dbUser) {
-    throw new Error(SIGN_IN_INVALID_ERROR_MESSAGE);
+    return {
+      success: false,
+      error: new AuthInvalidDataError(),
+    };
   }
 
   if (dbUser.githubId) {
-    throw new Error("This email is associated to a Github account");
+    return {
+      success: false,
+      error: new AuthGithubError(),
+    };
   }
 
   if (dbUser.googleId) {
-    throw new Error("This email is associated to a Google account");
+    return {
+      success: false,
+      error: new AuthGoogleError(),
+    };
   }
 
   if (!dbUser.password) {
-    throw new Error(SIGN_IN_INVALID_ERROR_MESSAGE);
+    return {
+      success: false,
+      error: new AuthInvalidDataError(),
+    };
   }
 
-  const passwordMatches = verifyPasswordHash(dbUser.password, password);
+  const passwordMatches = await verifyPasswordHash(dbUser.password, password);
 
   if (!passwordMatches) {
-    throw new Error(SIGN_IN_INVALID_ERROR_MESSAGE);
+    return {
+      success: false,
+      error: new AuthInvalidDataError(),
+    };
   }
 
   const { password: _, ...user } = dbUser;
 
   await setSession(user.id);
-  return user;
+  return { success: true, data: user };
 };

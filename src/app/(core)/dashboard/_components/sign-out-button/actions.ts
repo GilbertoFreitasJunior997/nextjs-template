@@ -8,6 +8,7 @@ export const logoff = async () => {
   const c = await cookies();
 
   const session = c.get(sessionCookieKey);
+
   if (session) {
     c.delete(sessionCookieKey);
     sessionService.invalidateSession(session?.value);

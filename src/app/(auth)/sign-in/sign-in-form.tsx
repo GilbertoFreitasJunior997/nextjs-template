@@ -3,9 +3,8 @@
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
 import { Input } from "@/components/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useActionMutation } from "@/lib/hooks/use-action-mutation";
+import { useZodForm } from "@/lib/hooks/use-zod-form";
 import { z } from "zod";
 import { signIn } from "./actions";
 
@@ -16,10 +15,10 @@ const formSchema = z.object({
 export type SignInFormData = z.infer<typeof formSchema>;
 
 export const SignInForm = () => {
-  const form = useForm<SignInFormData>({ resolver: zodResolver(formSchema) });
+  const form = useZodForm({ schema: formSchema });
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (formData: SignInFormData) => signIn(formData),
+  const { mutate, isPending } = useActionMutation({
+    action: signIn,
   });
 
   return (

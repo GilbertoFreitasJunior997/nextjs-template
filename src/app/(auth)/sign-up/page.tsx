@@ -58,12 +58,12 @@ export default function Page() {
       </div>
 
       <div className="flex justify-end items-center text-sm">
-        <p>Doesn't have an account?</p>
+        <p>Already have an account?</p>
         <Button
           variant={"link"}
           onClick={handleRedirectSignIn}
         >
-          Sign up
+          Sign in
         </Button>
       </div>
     </div>
