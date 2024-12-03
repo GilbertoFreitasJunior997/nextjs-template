@@ -59,7 +59,9 @@ export const DataTable = <TData, TValue>({
         </Table.Root>
       </div>
 
-      <DataTablePagination table={table} />
+      <div className="p-2 rounded-md border">
+        <DataTablePagination table={table} />
+      </div>
     </div>
   );
 };

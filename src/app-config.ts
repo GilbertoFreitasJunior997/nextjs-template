@@ -1,3 +1,15 @@
+import { Route } from "./lib/types";
+
 export const appConfig = {
-  redirectSignInURL: "/dashboard",
+  redirectSignInURL: "/",
+  routes: [
+    {
+      name: "Landing",
+      path: "/",
+    },
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+    },
+  ] satisfies Route[],
 };

@@ -12,7 +12,7 @@ export const DataTableFilter = <TData,>({
       onChange={(event) => {
         table.getColumn(column)?.setFilterValue(event.target.value);
       }}
-      className="max-w-sm"
+      className="max-w-sm h-[28px] my-1"
     />
   );
 };
