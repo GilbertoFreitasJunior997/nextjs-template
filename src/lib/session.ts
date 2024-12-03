@@ -10,7 +10,9 @@ const { createSession, generateToken, validateToken, invalidateSession } =
   sessionService;
 
 export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
-  (await cookies()).set(sessionCookieKey, token, {
+  const jar = await cookies();
+
+  jar.set(sessionCookieKey, token, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -20,7 +22,9 @@ export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
 };
 
 const getSessionToken = async () => {
-  return (await cookies()).get(sessionCookieKey)?.value;
+  const jar = await cookies();
+
+  return jar.get(sessionCookieKey)?.value;
 };
 
 export const getCurrentUser = cache(async () => {
@@ -54,7 +58,9 @@ export const setSession = async (userId: number) => {
 };
 
 const deleteSessionTokenCookie = async () => {
-  (await cookies()).delete(sessionCookieKey);
+  const jar = await cookies();
+
+  jar.delete(sessionCookieKey);
 };
 
 export const deleteSession = async () => {

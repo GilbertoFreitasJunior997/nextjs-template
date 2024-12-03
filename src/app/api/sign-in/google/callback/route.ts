@@ -8,7 +8,7 @@ import {
 } from "@/services/google/consts";
 import { GoogleUser } from "@/services/google/types";
 import { userService } from "@/services/user";
-import { OAuth2RequestError } from "arctic";
+import { ArcticFetchError, OAuth2RequestError } from "arctic";
 import { cookies } from "next/headers";
 
 export async function GET(request: Request): Promise<Response> {
@@ -16,9 +16,9 @@ export async function GET(request: Request): Promise<Response> {
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
 
-  const c = await cookies();
-  const storedState = c.get(googleStateCookie);
-  const codeVerifier = c.get(googleCodeCookie);
+  const jar = await cookies();
+  const storedState = jar.get(googleStateCookie);
+  const codeVerifier = jar.get(googleCodeCookie);
 
   if (
     !code ||
@@ -37,11 +37,14 @@ export async function GET(request: Request): Promise<Response> {
       code,
       codeVerifier.value,
     );
+
+    const accessToken = tokens.accessToken();
+
     const response = await fetch(
       "https://openidconnect.googleapis.com/v1/userinfo",
       {
         headers: {
-          Authorization: `Bearer ${tokens.accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -53,6 +56,10 @@ export async function GET(request: Request): Promise<Response> {
 
     if (existingUser) {
       await setSession(existingUser.id);
+
+      jar.delete(googleStateCookie);
+      jar.delete(googleCodeCookie);
+
       return new Response(null, {
         status: 302,
         headers: {
@@ -82,8 +89,8 @@ export async function GET(request: Request): Promise<Response> {
     const user = await createGoogleUser(googleUser);
     await setSession(user.id);
 
-    c.delete(googleStateCookie);
-    c.delete(googleCodeCookie);
+    jar.delete(googleStateCookie);
+    jar.delete(googleCodeCookie);
 
     return new Response(null, {
       status: 302,
@@ -92,15 +99,17 @@ export async function GET(request: Request): Promise<Response> {
       },
     });
   } catch (e) {
-    // the specific error message depends on the provider
     if (e instanceof OAuth2RequestError) {
-      // invalid code
-      return new Response(null, {
-        status: 400,
-      });
+      const code = e.code;
+
+      return new Response(null, { status: 400, statusText: code });
     }
-    return new Response(null, {
-      status: 500,
-    });
+    if (e instanceof ArcticFetchError) {
+      const cause = e.cause;
+
+      return new Response(null, { status: 500, statusText: `${cause}` });
+    }
+
+    return new Response(null, { status: 500 });
   }
 }

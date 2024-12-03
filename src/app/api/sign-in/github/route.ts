@@ -1,15 +1,18 @@
-import { github, githubStateCookie } from "@/services/github/consts";
+import {
+  github,
+  githubAuthScopes,
+  githubStateCookie,
+} from "@/services/github/consts";
 import { generateState } from "arctic";
 import { cookies } from "next/headers";
 
 export async function GET(): Promise<Response> {
   const state = generateState();
 
-  const url = await github.createAuthorizationURL(state, {
-    scopes: ["user:email"],
-  });
+  const url = github.createAuthorizationURL(state, githubAuthScopes);
 
-  (await cookies()).set(githubStateCookie, state, {
+  const jar = await cookies();
+  jar.set(githubStateCookie, state, {
     path: "/",
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
