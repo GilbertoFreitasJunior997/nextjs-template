@@ -8,6 +8,6 @@ export const googleAuth = new Google(
   `${env.HOST_NAME}${signInConfig.googleRoute}/callback`,
 );
 
-export const googleAuthScopes = ["profile", "email"];
+export const googleAuthScopes = ["profile", "email", "openid"];
 export const googleStateCookie = "google_oauth_state";
 export const googleCodeCookie = "google_code_verifier";

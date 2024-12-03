@@ -22,9 +22,10 @@ export async function GET(): Promise<Response> {
     httpOnly: true,
     maxAge: 60 * 10,
   };
+  const jar = await cookies();
 
-  (await cookies()).set(googleStateCookie, state, defaultCookieOptions);
-  (await cookies()).set(googleCodeCookie, codeVerifier, defaultCookieOptions);
+  jar.set(googleStateCookie, state, defaultCookieOptions);
+  jar.set(googleCodeCookie, codeVerifier, defaultCookieOptions);
 
   return Response.redirect(url);
 }
