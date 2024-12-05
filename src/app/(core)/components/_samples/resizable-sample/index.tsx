@@ -6,7 +6,7 @@ export const ResizableSample = () => {
   return (
     <Resizable.PanelGroup
       direction="horizontal"
-      className="min-h-[200px] max-w-md rounded-lg border md:min-w-[450px]"
+      className="max-h-[200px] max-w-md rounded-lg border md:min-w-[450px]"
     >
       <Resizable.Panel defaultSize={25}>
         <div className="flex h-full items-center justify-center p-6">

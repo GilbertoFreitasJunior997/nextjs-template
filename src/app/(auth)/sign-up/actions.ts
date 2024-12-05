@@ -1,6 +1,5 @@
 "use server";
 
-import "server-only";
 import { hashPassword } from "@/lib/password";
 import { setSession } from "@/lib/session";
 import { ActionResult } from "@/lib/types";
@@ -10,10 +9,11 @@ import { AuthGithubError, AuthGoogleError } from "../_lib/errors";
 import { SignUpFormData } from "./sign-up-form";
 
 export const signUp = async ({
+  name,
   email,
   password,
   confirmPassword,
-}: SignUpFormData): ActionResult<Omit<User, "password">> => {
+}: SignUpFormData): Promise<ActionResult<Omit<User, "password">>> => {
   if (password !== confirmPassword) {
     return {
       success: false,
@@ -47,6 +47,7 @@ export const signUp = async ({
   const hashedPassword = await hashPassword(password);
 
   const { password: _, ...createdUser } = await userService.create({
+    name,
     email,
     password: hashedPassword,
   });

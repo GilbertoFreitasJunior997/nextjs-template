@@ -1,12 +1,12 @@
 "use client";
 
 import { appConfig } from "@/app-config";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { SidebarItem } from "./sidebar-item";
+import { SidebarProps } from "./types";
 
-export const Sidebar = () => {
+export const Sidebar = ({ UserNav }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebarOpen = () => {
@@ -37,9 +37,7 @@ export const Sidebar = () => {
         </nav>
       </div>
 
-      <div>
-        <ThemeSwitcher />
-      </div>
+      <div className="w-full">{UserNav}</div>
     </div>
   );
 };
