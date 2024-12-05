@@ -23,7 +23,7 @@ export const ProfileDrawerForm = ({
   const form = useZodForm({ schema: formSchema, defaultValues });
 
   const handleFormSubmit = async (data: ProfileFormData) => {
-    console.log(data);
+    //console.log(data);
   };
 
   return (
