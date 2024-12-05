@@ -8,6 +8,10 @@ z.setErrorMap(zodErrorMap);
 
 export const useZodForm = <TSchema extends ZodSchema>({
   schema,
+  defaultValues,
 }: UseZodFormOptions<TSchema>) => {
-  return useForm<z.infer<TSchema>>({ resolver: zodResolver(schema) });
+  return useForm<z.infer<TSchema>>({
+    resolver: zodResolver(schema),
+    defaultValues,
+  });
 };
