@@ -1,7 +1,9 @@
 "use client";
 
 import { appConfig } from "@/app-config";
+import { Icon } from "@/components/icon";
 import { cn } from "@/lib/utils";
+import { CaretLeftIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarProps } from "./types";
@@ -21,11 +23,27 @@ export const Sidebar = ({ UserNav }: SidebarProps) => {
       )}
     >
       <div className="space-y-6 w-full overflow-hidden">
-        <button
-          type="button"
-          className="size-10 aspect-square rounded-full bg-emerald-500"
-          onClick={toggleSidebarOpen}
-        />
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              className="size-10 aspect-square rounded-full bg-emerald-500"
+              onClick={toggleSidebarOpen}
+            />
+            {appConfig.appName}
+          </div>
+
+          <button
+            type="button"
+            className="hover:bg-muted size-6 grid place-content-center rounded-full"
+            onClick={toggleSidebarOpen}
+          >
+            <Icon
+              src={CaretLeftIcon}
+              className="size-6"
+            />
+          </button>
+        </div>
 
         <nav className="flex flex-col gap-2">
           {appConfig.routes.map((route) => (

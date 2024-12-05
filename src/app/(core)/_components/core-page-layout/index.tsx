@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Sidebar } from "../sidebar";
 import { UserNav } from "../sidebar/user-nav";
+import { PageTitle } from "./page-title";
 
 export const CorePageLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -8,7 +9,7 @@ export const CorePageLayout = ({ children }: PropsWithChildren) => {
       <Sidebar UserNav={<UserNav />} />
 
       <div className="flex flex-col w-full overflow-auto pr-4">
-        <h1 className="font-semibold text-xl pt-4 pb-[10px]"> Dashboard </h1>
+        <PageTitle />
 
         {children}
       </div>

@@ -1,12 +1,13 @@
-import { Component1Icon, DashboardIcon } from "@radix-ui/react-icons";
+import { DashboardIcon } from "@radix-ui/react-icons";
 import { HomeIcon } from "lucide-react";
 import { Route } from "./lib/types";
 
 export const appConfig = {
   redirectSignInURL: "/",
+  appName: "Template",
   routes: [
     {
-      name: "Landing",
+      name: "Home",
       path: "/",
       icon: HomeIcon,
     },
@@ -14,11 +15,6 @@ export const appConfig = {
       name: "Dashboard",
       path: "/dashboard",
       icon: DashboardIcon,
-    },
-    {
-      name: "Components",
-      path: "/components",
-      icon: Component1Icon,
     },
   ] satisfies Route[],
 };
