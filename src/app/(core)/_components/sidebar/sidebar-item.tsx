@@ -20,6 +20,7 @@ export const SidebarItem = ({ route }: SidebarItemProps) => {
         isSelected ? "bg-accent-foreground text-accent" : "hover:bg-muted",
       )}
       href={path}
+      title={name}
     >
       <div className="min-w-10 h-10 grid place-content-center">
         <Icon

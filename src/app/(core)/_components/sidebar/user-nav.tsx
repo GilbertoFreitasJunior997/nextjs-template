@@ -1,11 +1,11 @@
 import { DropdownMenu } from "@/components/dropdown-menu";
 import { Icon } from "@/components/icon";
-import { db } from "@/db";
-import { usersTable } from "@/db/schemas";
+import { getUser } from "@/lib/session";
 import { UserCircle2 } from "lucide-react";
+import { SignOffDropdownItem } from "./sign-off-dropdown-item";
 
 export const UserNav = async () => {
-  const [user] = await db.select().from(usersTable).limit(1);
+  const user = await getUser();
 
   return (
     <DropdownMenu.Root>
@@ -44,7 +44,7 @@ export const UserNav = async () => {
           <DropdownMenu.Item>Settings</DropdownMenu.Item>
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
-        <DropdownMenu.Item>Log out</DropdownMenu.Item>
+        <SignOffDropdownItem />
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   );
