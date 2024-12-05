@@ -1,5 +1,6 @@
-// biome-ignore lint/suspicious/noExplicitAny:
-export type AnyFunction = (...args: any) => any;
+import { RadixIcon } from "@/components/icon/types";
+import { LucideIcon } from "lucide-react";
+
 export type OmitMerge<T, K extends object> = Omit<T, keyof K> & K;
 
 export type ActionSuccessResult<T> = {
@@ -8,6 +9,11 @@ export type ActionSuccessResult<T> = {
   message?: string;
 };
 export type ActionErrorResult = { success: false; error: unknown };
+export type ActionResult<T> = ActionSuccessResult<T> | ActionErrorResult;
 
-export type ActionDataResult<T> = ActionSuccessResult<T> | ActionErrorResult;
-export type ActionResult<T> = Promise<ActionDataResult<T>>;
+export type RouteIcon = LucideIcon | RadixIcon;
+export type Route = {
+  name: string;
+  path: string;
+  icon: RouteIcon;
+};

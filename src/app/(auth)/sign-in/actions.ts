@@ -15,7 +15,7 @@ import { SignInFormData } from "./sign-in-form";
 export const signIn = async ({
   email,
   password,
-}: SignInFormData): ActionResult<Omit<User, "password">> => {
+}: SignInFormData): Promise<ActionResult<Omit<User, "password">>> => {
   const [dbUser] = await userService.getByColumn("email", email);
 
   if (!dbUser) {

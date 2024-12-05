@@ -1,13 +1,12 @@
-"use client";
-
+import { cn } from "@/lib/utils";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import {
   CheckIcon,
   ChevronRightIcon,
   DotFilledIcon,
 } from "@radix-ui/react-icons";
-import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
+import { Icon } from "../icon";
 import {
   DropdownMenuCheckboxItemProps,
   DropdownMenuCheckboxItemRef,
@@ -27,7 +26,6 @@ import {
   DropdownMenuSubTriggerProps,
   DropdownMenuSubTriggerRef,
 } from "./types";
-import { Icon } from "../icon";
 
 const Root = DropdownMenuPrimitive.Root;
 

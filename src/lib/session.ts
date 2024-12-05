@@ -1,4 +1,5 @@
 "use server";
+
 import "server-only";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
@@ -27,9 +28,8 @@ const getSessionToken = async () => {
   return jar.get(sessionCookieKey)?.value;
 };
 
-export const getCurrentUser = cache(async () => {
+const getSession = async () => {
   const token = await getSessionToken();
-
   if (!token) {
     return;
   }
@@ -39,14 +39,24 @@ export const getCurrentUser = cache(async () => {
     return;
   }
 
-  const user = userService.getById(session.userId);
+  return session;
+};
+
+export const getUser = cache(async () => {
+  const session = await getSession();
+
+  if (!session) {
+    return;
+  }
+
+  const { password: _, ...user } = await userService.getById(session.userId);
   return user;
 });
 
 export const isAuthenticated = async () => {
-  const user = await getCurrentUser();
+  const isSessionValid = await getSession();
 
-  return !!user;
+  return !!isSessionValid;
 };
 
 export const setSession = async (userId: number) => {

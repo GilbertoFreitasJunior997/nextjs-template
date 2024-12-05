@@ -26,35 +26,32 @@ import { ThemeSwitcherSample } from "./_samples/theme-switcher-sample";
 
 export default function ComponentsPage() {
   return (
-    <div className="p-4">
-      Components
-      <div className="space-y-4 mt-20">
-        <DataTableSample />
-        <AccordionSample />
-        <BadgeSample />
-        <ButtonSample />
-        <CheckboxSample />
-        <LabelSample />
-        <CommandSample />
-        <DialogSample />
-        <PopoverSample />
-        <SheetSample />
-        <CalendarSample />
-        <InputSample />
-        <DropdownMenuSample />
-        <DatePickerSample />
-        <SkeletonSample />
-        <SelectSample />
-        <ProgressSample />
-        <InputOtpSample />
-        <SonnerSample />
-        <SwitchSample />
-        <TextareaSample />
-        <ResizableSample />
-        <ThemeSwitcherSample />
-        <NumberInputSample />
-        <FormSample />
-      </div>
+    <div className="space-y-4">
+      <DataTableSample />
+      <AccordionSample />
+      <BadgeSample />
+      <ButtonSample />
+      <CheckboxSample />
+      <LabelSample />
+      <CommandSample />
+      <DialogSample />
+      <PopoverSample />
+      <SheetSample />
+      <CalendarSample />
+      <InputSample />
+      <DropdownMenuSample />
+      <DatePickerSample />
+      <SkeletonSample />
+      <SelectSample />
+      <ProgressSample />
+      <InputOtpSample />
+      <SonnerSample />
+      <SwitchSample />
+      <TextareaSample />
+      <ResizableSample />
+      <ThemeSwitcherSample />
+      <NumberInputSample />
+      <FormSample />
     </div>
   );
 }
