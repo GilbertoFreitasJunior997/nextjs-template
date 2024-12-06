@@ -3,7 +3,7 @@
 import { hashPassword } from "@/lib/password";
 import { setSession } from "@/lib/session";
 import { ActionResult } from "@/lib/types";
-import { User } from "@/models/user.model";
+import { UserAuth } from "@/models/user.model";
 import { userService } from "@/services/user";
 import { AuthGithubError, AuthGoogleError } from "../_lib/errors";
 import { SignUpFormData } from "./sign-up-form";
@@ -13,7 +13,7 @@ export const signUp = async ({
   email,
   password,
   confirmPassword,
-}: SignUpFormData): Promise<ActionResult<Omit<User, "password">>> => {
+}: SignUpFormData): Promise<ActionResult<UserAuth>> => {
   if (password !== confirmPassword) {
     return {
       success: false,

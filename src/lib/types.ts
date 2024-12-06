@@ -8,8 +8,13 @@ export type ActionSuccessResult<T> = {
   data: T;
   message?: string;
 };
-export type ActionErrorResult = { success: false; error: unknown };
-export type ActionResult<T> = ActionSuccessResult<T> | ActionErrorResult;
+export type ActionErrorResult = {
+  success: false;
+  error: unknown;
+};
+export type ActionResult<T = undefined> =
+  | ActionSuccessResult<T>
+  | ActionErrorResult;
 
 export type RouteIcon = LucideIcon | RadixIcon;
 export type Route = {

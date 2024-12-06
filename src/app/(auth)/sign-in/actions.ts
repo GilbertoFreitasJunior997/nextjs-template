@@ -3,7 +3,7 @@
 import { verifyPasswordHash } from "@/lib/password";
 import { setSession } from "@/lib/session";
 import { ActionResult } from "@/lib/types";
-import { User } from "@/models/user.model";
+import { UserAuth } from "@/models/user.model";
 import { userService } from "@/services/user";
 import {
   AuthGithubError,
@@ -15,7 +15,7 @@ import { SignInFormData } from "./sign-in-form";
 export const signIn = async ({
   email,
   password,
-}: SignInFormData): Promise<ActionResult<Omit<User, "password">>> => {
+}: SignInFormData): Promise<ActionResult<UserAuth>> => {
   const [dbUser] = await userService.getByColumn("email", email);
 
   if (!dbUser) {
