@@ -1,12 +1,9 @@
-import { isAuthenticated } from "@/lib/session";
-import { redirect } from "next/navigation";
+import { requireAuth } from "@/lib/session";
 import { PropsWithChildren } from "react";
 import { CorePageLayout } from "./_components/core-page-layout";
 
 export default async function AppLayout({ children }: PropsWithChildren) {
-  if (!(await isAuthenticated())) {
-    redirect("sign-in");
-  }
+  await requireAuth();
 
   return <CorePageLayout> {children} </CorePageLayout>;
 }

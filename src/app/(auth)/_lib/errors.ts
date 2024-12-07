@@ -9,3 +9,7 @@ export class AuthGoogleError extends Error {
 export class AuthInvalidDataError extends Error {
   message = "Incorrect email or password";
 }
+
+export class AuthUserNotAuthenticatedError extends Error {
+  message = "User not authenticated";
+}

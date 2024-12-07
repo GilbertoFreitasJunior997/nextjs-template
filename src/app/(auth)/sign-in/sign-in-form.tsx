@@ -8,14 +8,14 @@ import { useZodForm } from "@/lib/hooks/use-zod-form";
 import { z } from "zod";
 import { signIn } from "./actions";
 
-const formSchema = z.object({
+const signInFormSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
-export type SignInFormData = z.infer<typeof formSchema>;
+export type SignInFormData = z.infer<typeof signInFormSchema>;
 
 export const SignInForm = () => {
-  const form = useZodForm({ schema: formSchema });
+  const form = useZodForm({ schema: signInFormSchema });
 
   const { mutate, isPending } = useActionMutation({
     action: signIn,

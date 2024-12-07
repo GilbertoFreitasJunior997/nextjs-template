@@ -1,7 +1,8 @@
+import { cn } from "@/lib/utils";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
+import { Icon } from "../icon";
 import {
   SheetBodyProps,
   SheetContentProps,
@@ -13,7 +14,6 @@ import {
   SheetTitleProps,
   SheetTitleRef,
 } from "./types";
-import { Icon } from "../icon";
 
 const Root = SheetPrimitive.Root;
 
@@ -22,7 +22,7 @@ const Trigger = SheetPrimitive.Trigger;
 const Close = SheetPrimitive.Close;
 
 const Body = ({ children }: SheetBodyProps) => (
-  <div className="py-4 grow overflow-x-hidden overflow-auto">{children}</div>
+  <div className="py-4 px-1 grow overflow-x-hidden overflow-auto">{children}</div>
 );
 
 const Content = forwardRef<SheetContentRef, SheetContentProps>(

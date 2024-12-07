@@ -4,7 +4,8 @@ import { Route } from "./lib/types";
 
 export const appConfig = {
   redirectSignInURL: "/",
-  appName: "Template",
+  logo: <div className="size-10 aspect-square rounded-full bg-emerald-500" />,
+  appName: <div className="font-bold">Template</div>,
   routes: [
     {
       name: "Home",

@@ -4,6 +4,7 @@ import "server-only";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { cache } from "react";
 import { sessionCookieKey } from "./consts";
 
@@ -22,7 +23,7 @@ export const setSessionTokenCookie = async (token: string, expiresAt: Date) => {
   });
 };
 
-const getSessionToken = async () => {
+export const getSessionToken = async () => {
   const jar = await cookies();
 
   return jar.get(sessionCookieKey)?.value;
@@ -83,3 +84,10 @@ export const deleteSession = async () => {
   await invalidateSession(token);
   await deleteSessionTokenCookie();
 };
+
+export const requireAuth = async () => {
+  if (!(await isAuthenticated())) {
+    redirect("sign-in");
+  }
+}
+

@@ -8,12 +8,12 @@ import { PropsWithChildren } from "react";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "100 900",
+  weight: "100 500 600 700 800 900",
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  weight: "100 900",
+  weight: "100 500 600 700 800 900",
 });
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             enableSystem
             disableTransitionOnChange
           >
-            <Toaster />
+            <Toaster position="bottom-left" />
             {children}
           </ThemeProvider>
         </QueryClientProvider>

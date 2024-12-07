@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
 	.text-balance {
 		text-wrap: balance;
@@ -43,9 +39,9 @@ body {
 	.dark {
 		--background: 0 0% 9%;
 		--foreground: 0 0% 98%;
-		--card: 240 10% 3.9%;
+		--card: 0 0% 9%;
 		--card-foreground: 0 0% 98%;
-		--popover: 240 10% 3.9%;
+		--popover: 0 0% 9%;
 		--popover-foreground: 0 0% 98%;
 		--primary: 0 0% 98%;
 		--primary-foreground: 240 5.9% 10%;
@@ -55,7 +51,7 @@ body {
 		--muted-foreground: 240 5% 64.9%;
 		--accent: 240 3.7% 15.9%;
 		--accent-foreground: 0 0% 98%;
-		--destructive: 0 62.8% 30.6%;
+		--destructive: 0 73% 40%;
 		--destructive-foreground: 0 0% 98%;
 		--border: 240 3.7% 25%;
 		--input: 240 3.7% 25%;

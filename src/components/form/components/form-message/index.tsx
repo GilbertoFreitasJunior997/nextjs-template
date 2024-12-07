@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
-import { FormMessageProps, FormMessageRef } from "./types";
-import { useFormField } from "../../context/form-field-context/hooks/use-form-field";
 import { cn } from "@/lib/utils";
+import { forwardRef } from "react";
+import { useFormField } from "../../context/form-field-context/hooks/use-form-field";
+import { FormMessageProps, FormMessageRef } from "./types";
 
 export const FormMessage = forwardRef<FormMessageRef, FormMessageProps>(
   ({ className, children, ...props }, ref) => {
@@ -16,7 +16,7 @@ export const FormMessage = forwardRef<FormMessageRef, FormMessageProps>(
       <p
         ref={ref}
         id={formMessageId}
-        className={cn("text-[0.8rem] font-medium text-destructive", className)}
+        className={cn("text-[0.8rem] text-destructive font-semibold", className)}
         {...props}
       >
         {body}

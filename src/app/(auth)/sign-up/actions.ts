@@ -12,15 +12,7 @@ export const signUp = async ({
   name,
   email,
   password,
-  confirmPassword,
 }: SignUpFormData): Promise<ActionResult<UserAuth>> => {
-  if (password !== confirmPassword) {
-    return {
-      success: false,
-      error: new Error(`passwords doesn't match`),
-    };
-  }
-
   const [dbUser] = await userService.getByColumn("email", email);
 
   if (dbUser?.githubId) {

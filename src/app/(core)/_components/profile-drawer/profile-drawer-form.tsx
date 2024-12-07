@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/button";
 import { Form } from "@/components/form";
-import { Icon } from "@/components/icon";
 import { Input } from "@/components/input";
 import { Sheet } from "@/components/sheet";
+import { useActionMutation } from "@/lib/hooks/use-action-mutation";
 import { useZodForm } from "@/lib/hooks/use-zod-form";
 import { UserAuth } from "@/models/user.model";
-import { Github } from "lucide-react";
+import Link from "next/link";
 import { z } from "zod";
 import { updateProfile } from "./actions";
 import { PROFILE_DRAWER_FORM_ID } from "./consts";
@@ -27,8 +27,12 @@ export const ProfileDrawerForm = ({ user }: { user: UserAuth }) => {
     },
   });
 
+  const { mutateAsync: mutate, isPending } = useActionMutation({
+    action: updateProfile,
+  });
+
   const handleFormSubmit = async ({ name }: ProfileFormData) => {
-    await updateProfile({ ...user, name });
+    await mutate({ ...user, name });
   };
 
   return (
@@ -50,25 +54,33 @@ export const ProfileDrawerForm = ({ user }: { user: UserAuth }) => {
             readOnly={true}
           />
         </Form>
-        <div className="mt-6">
-          <h1>Linked Accounts</h1>
 
-          <div>
-            <Icon
-              src={Github}
-              size={"default"}
-              className="border rounded-full size-10"
-            />
-          </div>
+        <div className="flex w-full justify-end items-center">
+          <Link
+            href="reset-password"
+            className="mt-4"
+          >
+            <Button variant="link">Reset Password</Button>
+          </Link>
         </div>
       </Sheet.Body>
 
       <Sheet.Footer>
         <Sheet.Close asChild>
-          <Button variant="outline">Cancel</Button>
+          <Button
+            disabled={isPending}
+            variant="outline"
+          >
+            Cancel
+          </Button>
         </Sheet.Close>
 
-        <Button form={PROFILE_DRAWER_FORM_ID}>Save</Button>
+        <Button
+          disabled={isPending}
+          form={PROFILE_DRAWER_FORM_ID}
+        >
+          Save
+        </Button>
       </Sheet.Footer>
     </>
   );

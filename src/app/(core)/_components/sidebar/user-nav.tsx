@@ -1,6 +1,7 @@
 import { DropdownMenu } from "@/components/dropdown-menu";
 import { Icon } from "@/components/icon";
 import { Sheet } from "@/components/sheet";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { getUser } from "@/lib/session";
 import { UserCircle2 } from "lucide-react";
 import { ProfileDrawer } from "../profile-drawer";
@@ -33,8 +34,10 @@ export const UserNav = async () => {
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content
-          className="w-56"
+          className="w-56 mb-4"
+          sideOffset={16}
           forceMount
+          side="right"
         >
           <DropdownMenu.Label className="font-normal">
             <div className="flex flex-col space-y-1">
@@ -50,7 +53,7 @@ export const UserNav = async () => {
               <DropdownMenu.Item>Profile</DropdownMenu.Item>
             </Sheet.Trigger>
 
-            <DropdownMenu.Item>Settings</DropdownMenu.Item>
+            <ThemeSwitcher />
           </DropdownMenu.Group>
           <DropdownMenu.Separator />
           <SignOffDropdownItem />

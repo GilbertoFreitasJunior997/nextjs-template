@@ -2,6 +2,7 @@
 
 import { appConfig } from "@/app-config";
 import { Icon } from "@/components/icon";
+import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { CaretLeftIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
@@ -24,14 +25,7 @@ export const Sidebar = ({ UserNav }: SidebarProps) => {
     >
       <div className="space-y-6 w-full overflow-hidden">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="size-10 aspect-square rounded-full bg-emerald-500"
-              onClick={toggleSidebarOpen}
-            />
-            {appConfig.appName}
-          </div>
+          <Logo onClick={toggleSidebarOpen} />
 
           <button
             type="button"

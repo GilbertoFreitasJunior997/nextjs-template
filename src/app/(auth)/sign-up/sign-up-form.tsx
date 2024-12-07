@@ -8,27 +8,17 @@ import { useZodForm } from "@/lib/hooks/use-zod-form";
 import { z } from "zod";
 import { signUp } from "./actions";
 
-const formSchema = z
+const signUpFormSchema = z
   .object({
     email: z.string().email(),
     name: z.string().min(2),
-    password: z.string().min(6),
-    confirmPassword: z.string(),
+    password: z.string().min(6)
   })
-  .superRefine(({ confirmPassword, password }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Passwords don't match",
-        path: ["confirmPassword"],
-      });
-    }
-  });
 
-export type SignUpFormData = z.infer<typeof formSchema>;
+export type SignUpFormData = z.infer<typeof signUpFormSchema>;
 
 export const SignUpForm = () => {
-  const form = useZodForm({ schema: formSchema });
+  const form = useZodForm({ schema: signUpFormSchema });
 
   const { mutate, isPending } = useActionMutation({
     action: signUp,
@@ -51,12 +41,6 @@ export const SignUpForm = () => {
         <Input
           form={form}
           name="password"
-          type="password"
-        />
-        <Input
-          form={form}
-          name="confirmPassword"
-          label="Confirm password"
           type="password"
         />
       </div>

@@ -1,5 +1,6 @@
-import { ActionDataResult } from "@/lib/types";
+import { ActionResult } from "@/lib/types";
 
 export type UseActionMutationOptions<TData, TVariables> = {
-  action: (variables: TVariables) => Promise<ActionDataResult<TData>>;
+  action: (variables: TVariables) => Promise<ActionResult<TData>>;
+  throwOnUndefined?: boolean;
 };

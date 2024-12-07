@@ -1,41 +1,36 @@
 "use client";
 
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { uppercaseFirstLetter } from "@/lib/utils";
 import { useTheme } from "next-themes";
-import { Button } from "../button";
 import { DropdownMenu } from "../dropdown-menu";
+import { themes } from "./consts";
 
 export const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
-
-  const iconClassName = "rotate-0 scale-100 transition-all size-4";
+  const { theme: selectedTheme, setTheme } = useTheme();
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
+    <DropdownMenu.Sub>
+      <DropdownMenu.SubTrigger>Select theme</DropdownMenu.SubTrigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.SubContent
+          className="mb-4"
+          sideOffset={8}
         >
-          {theme === "light" ? (
-            <SunIcon className={iconClassName} />
-          ) : (
-            <MoonIcon className={iconClassName} />
-          )}
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content align="end">
-        <DropdownMenu.Item onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenu.Item>
-        <DropdownMenu.Item onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenu.Item>
-        <DropdownMenu.Item onClick={() => setTheme("system")}>
-          System
-        </DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+          <DropdownMenu.RadioGroup
+            value={selectedTheme}
+            onValueChange={(value) => setTheme(value)}
+          >
+            {themes.map((theme) => (
+              <DropdownMenu.RadioItem
+                key={theme}
+                value={theme}
+              >
+                {uppercaseFirstLetter(theme)}
+              </DropdownMenu.RadioItem>
+            ))}
+          </DropdownMenu.RadioGroup>
+        </DropdownMenu.SubContent>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Sub>
   );
 };

@@ -1,8 +1,8 @@
-import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
-import { ButtonProps, ButtonRef } from "./types";
-import { buttonVariants } from "./consts";
+import { Slot } from "@radix-ui/react-slot";
 import { forwardRef } from "react";
+import { buttonVariants } from "./consts";
+import { ButtonProps, ButtonRef } from "./types";
 
 export const Button = forwardRef<ButtonRef, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {

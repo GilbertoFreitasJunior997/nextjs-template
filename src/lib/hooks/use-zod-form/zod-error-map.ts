@@ -9,6 +9,12 @@ export const zodErrorMap: z.ZodErrorMap = (issue, ctx) => {
     }
   }
 
+  if (ctx.defaultError === "Required") {
+    return {
+      message: "Please provide a value",
+    };
+  }
+
   return {
     message: ctx.defaultError,
   };
