@@ -20,16 +20,16 @@ export const Sidebar = ({ UserNav }: SidebarProps) => {
     <div
       className={cn(
         "rounded-xl p-2 flex flex-col justify-between items-center border transition-[width]",
-        isOpen ? "w-[258px]" : "w-[58px]",
+        !isOpen ? "w-[258px]" : "w-[58px]",
       )}
     >
       <div className="space-y-6 w-full overflow-hidden">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center relative">
           <Logo onClick={toggleSidebarOpen} />
 
           <button
             type="button"
-            className="hover:bg-muted size-6 grid place-content-center rounded-full"
+            className="hover:bg-muted size-6 grid place-content-center rounded-full absolute right-0 top-1/2 -translate-y-1/2"
             onClick={toggleSidebarOpen}
           >
             <Icon
