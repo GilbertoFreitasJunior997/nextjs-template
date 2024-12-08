@@ -4,14 +4,14 @@ import Image from "next/image";
 import { Route } from "./lib/types";
 import logoImg from "./logo.png";
 
-const brandName = "Money Map";
+const brandName = "Template";
 
 export const appConfig = {
   redirectSignInURL: "/",
   brandName,
   logo: (
     <Image
-      className="rounded-full min-w-[40px] w-[40px]"
+      className="w-10 h-10 rounded-full"
       src={logoImg}
       alt="Logo"
     />
