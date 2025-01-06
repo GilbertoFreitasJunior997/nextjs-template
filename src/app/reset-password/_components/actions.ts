@@ -1,9 +1,9 @@
 "use server";
 
 import { appConfig } from "@/app-config";
-import { AuthUserNotAuthenticatedError } from "@/app/(auth)/_lib/errors";
+import { authUserNotAuthenticatedError } from "@/app/(auth)/_lib/errors";
 import { hashPassword } from "@/lib/password";
-import { getSessionToken, getUser, setSession } from "@/lib/session";
+import { checkUser, getSessionToken, setSession } from "@/lib/session";
 import { ActionResult } from "@/lib/types";
 import { sessionService } from "@/services/session";
 import { userService } from "@/services/user";
@@ -19,13 +19,13 @@ export const resetPassword = async ({
     const token = await getSessionToken();
 
     if (!token) {
-      throw new AuthUserNotAuthenticatedError();
+      return {
+        success: false,
+        error: authUserNotAuthenticatedError,
+      };
     }
 
-    const user = await getUser();
-    if (!user) {
-      throw new AuthUserNotAuthenticatedError();
-    }
+    const user = await checkUser();
     const { id } = user;
     const hashedPassword = await hashPassword(password);
 
@@ -35,10 +35,10 @@ export const resetPassword = async ({
 
     await invalidateSession(token);
     await setSession(id);
-  } catch (e) {
+  } catch (error) {
     return {
       success: false,
-      error: e,
+      error,
     };
   }
 

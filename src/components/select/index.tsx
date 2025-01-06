@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import {
   CaretSortIcon,
   CheckIcon,
@@ -7,7 +8,6 @@ import {
   ChevronUpIcon,
 } from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 import {
   SelectContentProps,
@@ -37,14 +37,16 @@ const Trigger = forwardRef<SelectTriggerRef, SelectTriggerProps>(
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+        "flex h-8 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
         className,
       )}
       {...props}
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <CaretSortIcon className="size-4 opacity-50" />
+        <div className="flex gap-1">
+          <CaretSortIcon className="size-4 opacity-50" />
+        </div>
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   ),
@@ -132,7 +134,7 @@ const Item = forwardRef<SelectItemRef, SelectItemProps>(
     <SelectPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex w-full cursor-default select-none items-center py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 rounded-sm focus:bg-accent hover:bg-accent focus:text-accent-foreground px-2",
         className,
       )}
       {...props}
