@@ -4,18 +4,21 @@ import { ChangeEvent, ForwardedRef } from "react";
 import { FieldValues } from "react-hook-form";
 import { FormInputBase } from "../form/components/form-input-base";
 import { Input } from "../input";
+import { currencyFormatter } from "./consts";
 import { NumberInputProps, NumberInputRef } from "./types";
 
 const NumberInputBase = <TForm extends FieldValues>(
   {
     className,
     value,
-    fractionDigits,
+    fractionDigits = { min: 2, max: 2 },
     form,
     name,
     description,
     label,
+    isCurrency,
     onChange,
+    isSkeleton,
     ...props
   }: NumberInputProps<TForm>,
   ref: ForwardedRef<NumberInputRef>,
@@ -25,23 +28,25 @@ const NumberInputBase = <TForm extends FieldValues>(
     form={form}
     description={description}
     label={label}
+    isSkeleton={isSkeleton}
   >
     {({ field }) => {
-      const { min, max } = fractionDigits ?? {};
+      const { max } = fractionDigits;
 
-      const formatter = new Intl.NumberFormat("en-US", {
-        minimumFractionDigits: min,
-        maximumFractionDigits: max,
-      });
+      if (!max) {
+        return;
+      }
 
       const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
+        const input = e.target;
+
+        const { value } = input;
 
         let newValue: number | undefined = undefined;
 
         try {
-          newValue = Number.parseFloat(value.replaceAll(",", ""));
-          newValue = Number.isNaN(newValue) ? undefined : newValue;
+          newValue = Number.parseFloat(value.replace(/\D/g, ""));
+          newValue = Number.isNaN(newValue) ? undefined : newValue / 10 ** max;
         } finally {
           onChange?.(newValue);
           field?.onChange(newValue);
@@ -49,7 +54,11 @@ const NumberInputBase = <TForm extends FieldValues>(
       };
 
       const baseValue = form ? field?.value : value;
-      let inputValue = baseValue ? formatter.format(baseValue) : "";
+      let inputValue = baseValue
+        ? isCurrency
+          ? currencyFormatter.format(baseValue)
+          : baseValue.toString()
+        : "";
       if (inputValue === "NaN") {
         inputValue = "";
       }

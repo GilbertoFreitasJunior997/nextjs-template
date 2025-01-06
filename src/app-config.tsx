@@ -1,20 +1,20 @@
 import { DashboardIcon } from "@radix-ui/react-icons";
-import { HomeIcon } from "lucide-react";
-import Image from "next/image";
+import { BarChart } from "lucide-react";
+import { Icon } from "./components/icon";
 import { Route } from "./lib/types";
-import logoImg from "./logo.png";
 
-const brandName = "Template";
+const brandName = "Next.js Template";
 
 export const appConfig = {
-  redirectSignInURL: "/",
+  redirectSignInURL: "/dashboard",
   brandName,
   logo: (
-    <Image
-      className="w-10 h-10 rounded-full"
-      src={logoImg}
-      alt="Logo"
-    />
+    <div className="w-10 h-8 text-green-600 dark:text-green-400">
+      <Icon
+        src={BarChart}
+        className="size-full"
+      />
+    </div>
   ),
   appName: (
     <div
@@ -25,11 +25,6 @@ export const appConfig = {
     </div>
   ),
   routes: [
-    {
-      name: "Home",
-      path: "/",
-      icon: HomeIcon,
-    },
     {
       name: "Dashboard",
       path: "/dashboard",

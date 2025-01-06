@@ -11,8 +11,10 @@ export type SelectInputProps<
   TForm extends FieldValues,
 > = InputDefaultProps<TForm> & {
   items: TItem[];
+  itemRender?: (item: TItem) => ReactNode;
   value?: TItem;
   onChange?: (value?: TItem) => void;
   className?: string;
   placeholder?: ReactNode;
+  isLoading?: boolean;
 };
