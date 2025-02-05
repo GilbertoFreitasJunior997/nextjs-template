@@ -1,18 +1,21 @@
 import { PropsWithChildren } from "react";
-import { Sidebar } from "../sidebar";
-import { UserNav } from "../sidebar/user-nav";
 import { PageTitle } from "./page-title";
+import { AppSidebar } from "../app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/sidebar";
+import { cookies } from "next/headers";
 
-export const CorePageLayout = ({ children }: PropsWithChildren) => {
+export const CorePageLayout = async ({ children }: PropsWithChildren) => {
+  const cookieStore = await cookies()
+  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
+
   return (
-    <div className="h-dvh flex p-4 pr-0 gap-9 bg-gradient-to-t from-background light:via-accent via-background to-accent">
-      <Sidebar UserNav={<UserNav />} />
-
-      <div className="flex flex-col w-full overflow-auto pr-4">
+    <SidebarProvider defaultOpen={defaultOpen}>
+      <AppSidebar />
+      <div className="flex flex-col w-full overflow-auto p-2">
+        <SidebarTrigger />
         <PageTitle />
-
         {children}
       </div>
-    </div>
+    </SidebarProvider>
   );
 };

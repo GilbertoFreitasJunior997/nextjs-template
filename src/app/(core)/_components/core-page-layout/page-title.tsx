@@ -3,7 +3,7 @@
 import { appConfig } from "@/app-config";
 import { uppercaseFirstLetter } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { getIsSidebarItemCurrentPath } from "../sidebar/utils";
+import { getIsSidebarItemCurrentPath } from "../app-sidebar/utils";
 
 export const PageTitle = () => {
   const pathname = usePathname();
