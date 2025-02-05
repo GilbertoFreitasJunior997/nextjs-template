@@ -3,9 +3,9 @@
 import { DropdownMenu } from "@/components/dropdown-menu";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { signOff } from "./actions";
+import { signOff } from "../../actions";
 
-export const SignOffDropdownItem = () => {
+export const SignOutDropdownItem = () => {
   const queryClient = useQueryClient();
 
   const [isPending, setIsPending] = useState(false);

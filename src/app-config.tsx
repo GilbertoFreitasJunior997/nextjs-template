@@ -9,7 +9,7 @@ export const appConfig = {
   redirectSignInURL: "/dashboard",
   brandName,
   logo: (
-    <div className="w-10 h-8 text-green-600 dark:text-green-400">
+    <div className="h-8 min-w-[40px] pr-2">
       <Icon
         src={BarChart}
         className="size-full"
