@@ -2,14 +2,19 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { UseActionMutationOptions } from "./types";
 
-export const useActionMutation = <TData, TVariables>({
+export const useActionMutation = <TData, TVariables extends unknown[]>({
   action,
-  throwOnUndefined = true,
+  onSuccess,
+  onSettled,
+  throwOnUndefined = false,
+  mutationKey,
 }: UseActionMutationOptions<TData, TVariables>) => {
-  return useMutation({
-    mutationFn: action,
-    onSettled: (data) => {
-      if (!data) {
+  const mutation = useMutation({
+    mutationFn: (variables: TVariables) => action(...variables),
+    onSettled: async (result) => {
+      await onSettled?.();
+
+      if (!result) {
         if (!throwOnUndefined) {
           return;
         }
@@ -18,22 +23,37 @@ export const useActionMutation = <TData, TVariables>({
         return;
       }
 
-      if (data.success) {
-        if (data.message) {
-          toast.success(data.message);
+      if (result.success) {
+        if (result.message) {
+          toast.success(result.message);
         }
+        await onSuccess?.(result.data);
 
         return;
       }
 
       let errorMessage = "";
 
-      if (data.error instanceof Error) {
-        errorMessage = data.error.message;
+      if (
+        result.error instanceof Error ||
+        (result.error &&
+          typeof result.error === "object" &&
+          "message" in result.error)
+      ) {
+        errorMessage = String(result.error.message);
       } else {
-        errorMessage = String(data.error);
+        errorMessage = String(result.error);
       }
       toast.error(errorMessage);
     },
+    mutationKey,
   });
+
+  const wrappedMutate = (...variables: TVariables) =>
+    mutation.mutate(variables);
+
+  return {
+    ...mutation,
+    mutate: wrappedMutate,
+  };
 };

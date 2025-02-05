@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = "";
+const siteUrl = "https://money-map-gray.vercel.app/";
 
 const SEOConfig = {
-  siteName: "Next Template",
-  description: "Awesome description",
+  siteName: "Money Map",
+  description: "Your personal financial GPS for navigating wealth and success",
   siteUrl,
   imageUrl: `${siteUrl}moneymap-display.png`,
   ogType: "website",

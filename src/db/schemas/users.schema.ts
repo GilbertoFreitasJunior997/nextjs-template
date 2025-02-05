@@ -1,6 +1,4 @@
-import { relations } from "drizzle-orm";
-import { pgTable, serial, text } from "drizzle-orm/pg-core";
-import { sessionsTable } from "./sessions.schema";
+import { integer, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -11,6 +9,10 @@ export const usersTable = pgTable("users", {
   githubId: text("github_id"),
 });
 
-export const usersRelations = relations(usersTable, ({ many }) => ({
-  sessions: many(sessionsTable),
-}));
+export const userId = () =>
+  integer("user_id")
+    .references(() => usersTable.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
+    .notNull();
